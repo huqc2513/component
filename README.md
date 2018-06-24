@@ -1,8 +1,17 @@
 # component
-
 >上下拉刷新例子，以及一些其他组件
 
+
+1.下拉刷新基于better-scroll，组件基于cube-ui中抽离出来
+组件代码分析文章地址 ：https://www.jianshu.com/p/9baf9e3aff96
+
+
+
+
+
 ## Build Setup
+
+
 
 ``` bash
 # install dependencies
