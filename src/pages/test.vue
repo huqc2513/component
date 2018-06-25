@@ -15,7 +15,6 @@
   import scroll from '../components/scroll/scroll.vue'
 
 
-
   export default {
     created() {
 
@@ -72,7 +71,6 @@
 
 <style scoped>
 
-
   .foodPanel-container {
     height: 100%;
     width: 100%;
@@ -93,7 +91,7 @@
     height: 60px;
     line-height: 60px;
     font-size: 18px;
-    
+  
     border-bottom: 1px solid #e5e5e5;
   }
 

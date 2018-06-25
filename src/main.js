@@ -6,6 +6,15 @@ Vue.config.productionTip = false
 
 import './assets/reset.css'
 
+
+import toast from './components/toast/index'
+import notiFication from './components/notiFication/index'
+
+Vue.use(toast)
+Vue.use(notiFication)
+
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

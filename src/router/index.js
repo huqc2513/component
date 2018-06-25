@@ -18,6 +18,13 @@ export default new Router({
       meta: {
         title: "测试"
       }
+    },
+    {
+      path: '/home',
+      component : resolve => require(['../pages/home'], resolve),
+      meta: {
+        title: "主页"
+      }
     }
   ]
 })
