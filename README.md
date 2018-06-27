@@ -10,9 +10,12 @@
 在线预览 ：http://112.74.173.191/component/index.html#/test <br><br>
 <br>
 <br>
-组件代码分析文章地址 ：https://www.jianshu.com/p/9baf9e3aff96
+滚动组件代码分析文章地址 ：https://www.jianshu.com/p/9baf9e3aff96
 
 
+<br>
+路由拦截以及缓存路由信息
+http://note.youdao.com/noteshare?id=0dd2928ac97f6206dd65fd0ef994e392
 
 
 
