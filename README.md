@@ -85,11 +85,17 @@ router.beforeEach((to, from, next) => {
 
 
 
+### Development
+
+```shell
+
+npm install
+npm run dev
+
+```
 
 
->npm install
->npm run dev
->loaclhost:8080/
+
 
 
 
