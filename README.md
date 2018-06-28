@@ -21,14 +21,9 @@ http://112.74.173.191/component/index.html#/test <br><br>
 
 
 
-### Development
+npm install<br>
+npm run dev<br>
 
-```shell
-
-npm install
-npm run dev
-
-```
 
 
 
