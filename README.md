@@ -86,11 +86,10 @@ router.beforeEach((to, from, next) => {
 
 
 
-# install dependencies
-npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+>npm install
+>npm run dev
+>loaclhost:8080/
 
 
 
