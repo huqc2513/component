@@ -11,7 +11,7 @@ component
 滚动组件代码分析文章地址 ：https://www.jianshu.com/p/9baf9e3aff96
 <br>
 
-##路由拦截
+## 路由登录拦截
 
 使用vuex和vue-router实现路由登录拦截，登录成功后 ，跳转到之前的登录成功的页面
 
