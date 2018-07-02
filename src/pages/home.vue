@@ -1,15 +1,18 @@
 <template>
+
   <div>
         <h1>home</h1>
           <marquee  direction='up'>
-             <marquee-item v-for="(i,index) in articleList" :key="index" > {{i}}</marquee-item>
+              <marquee-item v-for="(i,index) in articleList" :key="index" > {{i}}</marquee-item> 
           </marquee>
   </div>
+
 </template>
 
 <script type="text/ecmascript-6">
   
-  import  { marquee , marqueeItem }  from '@/components/marquee/index'
+   import  { marquee, marqueeItem }  from '@/components/marquee/index'
+
 
   export default {
     components:{
@@ -27,13 +30,7 @@
         ]
       }
     },
-    created() {
-      
-      // this.$notify({
-      //   content: "test $notify",
-      //   btn: "close",
-      //   autoClose: 2000
-      // });
+    credsted() {
     
       toast('sdf')
     
