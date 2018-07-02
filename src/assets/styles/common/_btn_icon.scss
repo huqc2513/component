@@ -1,0 +1,18 @@
+@import "../base/fn";
+
+.icon-fixed {
+  position: fixed;
+  right: 0.27rem;
+  bottom: 4rem;
+  z-index: 10;
+  border-radius: 50%;
+}
+
+.icon-fixed img {
+  width: 1.3rem;
+  height: 1.3rem;
+
+}
+
+
+

@@ -1,0 +1,116 @@
+// theme
+$theme_primary: #191A19;
+$theme_primary_press: darken($theme_primary, 30);
+$theme_primary_disabled: lighten($theme_primary, 25);
+
+$theme_warn: #FF362E;
+$theme_tip: #eb8036;
+
+$tabColor: #F5B449;
+
+//全局主题蓝色
+$alltheme_color: #015FFC;
+//主题色，蓝色
+$theme_color: #3D5EFC;
+//淡蓝色
+$themeWeak_color: #538EF2;
+// background
+// 前景色
+$backgroundColor_foreColor: #ffffff;
+// 背景色
+$backgroundColor_backColor: #F2F4F6;
+// 活跃背景色
+$backgroundColor_active: #F1F1F1;
+// 非活跃背景色
+$backgroundColor_inActive: #A3A5A5;
+// 占位符背景色
+$backgroundColor_placeholder: #f0f0f0;
+// 遮罩层背景色
+$backgroundColor_mask: rgba(0, 0, 0, 0.5);
+
+$lineColor_sub: #ddd;
+$textColor_node: #ddd;
+$textColor_disabled: #ddd;
+$fontSize-node: px2rem(24);
+$textColor_link: #ddd;
+$textColor_placeholder: #ddd;
+
+//描述类颜色
+$textColor: #656665;
+
+//描述淡灰色
+$textGray: #A5A6A5;
+// line
+$lineColor_default: #F2F4F6;
+
+//正式标题
+$formal_TitleColor: #323332;
+//border
+$borderColor_default: #DBDBDB;
+
+//标签颜色
+$labelsColor: #F5B44A;
+// text
+// 缺省颜色（大段）
+$textColor_default: #696969;
+// 标题颜色
+$textColor_title: #303030;
+// 次要内容颜色
+$textColor_sub: #ABABAB;
+// 不重要内容颜色
+$textColor_light: #ABABAB;
+// 按钮文字颜色
+$textColor_btn: #909090;
+// 警告颜色
+$textColor_warn: $theme_warn;
+// 活跃颜色
+$textColor_active: #ffd307;
+// 特殊深色底的用色
+$textColor_forDark: #ffffff;
+
+//价格颜色
+$priceColor: #D57033;
+
+// link
+// 链接颜色
+$linkColor_default: #3a53bf;
+
+// icon
+// 部分图标颜色
+$iconColor_default: #686868;
+
+// btn
+$btnColor_default: $theme_primary;
+$btnColor_active: #179280;
+
+// img
+$imgBgColor: #F0F0F0;
+
+$text2Color_title: #222;
+$text2Color_sub: #999;
+
+// active
+$active_item: #F2F2F2;
+
+//通常按钮颜色
+$primaryButtonColor_default: #3375fd;
+$primaryButtonColor_press: #2452b1;
+$primaryButtonColor_disable: #DBDBDB;
+//警告按钮颜色
+$warnButtonColor_default: #FF362E;
+$warnButtonColor_press: #e6493a;
+$warnButtonColor_disable: #DBDBDB;
+//辅助按钮颜色
+$subButtonColor_default: #EFB62C;
+$subButtonColor_press: #EFB62C;
+$subButtonColor_disable: #EFB62C;
+
+$grayButtonColor_default: #DBDBDB;
+$grayButtonColor_press: darken(#DBDBDB, 30);
+
+// 输入框
+$inputBtnBgColor: #f3f3f3;
+
+// 渐变色
+$colorGradientDeep: rgb(121, 96, 231);
+$colorGradientLight: rgb(51, 117, 253);

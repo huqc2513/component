@@ -1,0 +1,4 @@
+@mixin spImg($url, $left, $top, $imgWidth ) {
+  background: url($url) no-repeat $left $top;
+  background-size: $imgWidth;
+}

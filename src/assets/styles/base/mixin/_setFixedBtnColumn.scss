@@ -1,0 +1,63 @@
+@import "../variable/jxh_standard";
+@import "../function/px2rem";
+
+@mixin _setFixedBtnColumn($flexDirection:column, $num:3) {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: px2rem(94);
+  max-width:$maxWidth;
+  margin:auto;
+  z-index: 10;
+  border-top: 1px solid $jxh_lineColor_sub;
+  display: flex;
+  align-items: center;
+  & > li {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: $flexDirection;
+    font-size: $jxh_fontSize_light;
+    width: 50%/$num;
+    background: #FAFAFA;
+    color: #4c4c4c;
+    .icon {
+      font-size: px2rem(32);
+      margin-bottom: px2rem(10);
+    }
+    p {
+      text-align: center;
+    }
+    &:active {
+      background: #f0f0f0;
+      color: rgba(0, 0, 0, 0.7);
+    }
+    border-left: 1px solid $jxh_lineColor_sub;
+    &:first-child {
+      border-left: none;
+    }
+
+    // 联系店家
+    &.only-text {
+      flex: 1;
+      background-color: #1CBF27;
+      color: #fff;
+      border-left: none;
+      font-size: $jxh_fontSize_default;
+      &:active {
+        background-color: #16b326;
+        color: transparentize(#ffffff, 0.6);
+      }
+    }
+
+    &.only-text.blue {
+      background: #3375fd;
+      &:active {
+        background: #2452b1;
+        color: transparentize(#ffffff, 0.6);
+      }
+    }
+  }
+}

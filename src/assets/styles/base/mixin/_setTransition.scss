@@ -1,0 +1,47 @@
+@mixin setSlideRight() {
+  .slideRight-enter-active, .slideRight-leave-active {
+    transition: all .4s;
+  }
+  .slideRight-enter, .slideRight-leave-active {
+    transform: translate3d(2rem, 0, 0);
+    opacity: 0;
+  }
+}
+@mixin setSlideTop() {
+  .slideTop-enter-active, .slideTop-leave-active {
+    transition: all .4s;
+  }
+  .slideTop-enter, .slideTop-leave-active {
+    transform: translate3d(0, -2rem, 0);
+    opacity: 0;
+  }
+}
+
+@mixin setSlideBottom() {
+  .slideBottom-enter-active, .slideBottom-leave-active {
+    transition: all .4s;
+  }
+  .slideBottom-enter, .slideBottom-leave-active {
+    transform: translate3d(0, 2rem, 0);
+    opacity: 0;
+  }
+}
+
+@mixin setSlideLeft() {
+  .slideLeft-enter-active, .slideLeft-leave-active {
+    transition: all .4s;
+  }
+  .slideLeft-enter, .slideLeft-leave-active {
+    transform: translate3d(-2rem, 0, 0);
+    opacity: 0;
+  }
+}
+
+@mixin setFade() {
+  .slideLeft-enter-active, .slideLeft-leave-active {
+    transition: all .4s;
+  }
+  .slideLeft-enter, .slideLeft-leave-active {
+    opacity: 0;
+  }
+}

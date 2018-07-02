@@ -1,0 +1,11 @@
+@import "checkInput";
+/// px转rem
+/// @param {number} $px 需要的px数
+/// @param {number} $baseSize 1rem代表的px数
+@function px2rem($px, $baseSize: 75) {
+  @if unitless($px) and unitless($baseSize) {
+    @return ($px / $baseSize) * 1rem;
+  } @else {
+    @return (strip-units($px) / $baseSize) * 1rem;
+  }
+}

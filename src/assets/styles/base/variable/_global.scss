@@ -1,0 +1,82 @@
+@import '../function/px2rem';
+
+// font
+// 英文字体
+$fontEN: -apple-system-font, "Helvetica Neue";
+// 中文字体
+$fontCN: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "黑体";
+// 衬线字体
+$fontSans: sans-serif;
+// 缺省字体
+$fontDefault: $fontCN, $fontEN, $fontSans;
+
+// size
+// 缺省字体大小
+$fontSize_default: px2rem(28);
+// 只能为阿拉伯数字信息，如金额、时间等
+$fontSize_titleBiggest: px2rem(36);
+// 页面大标题，一般用于结果、空状态等信息单一页面
+$fontSize_titleBig: px2rem(34);
+// 页面内大按钮字体，与按钮搭配使用
+$fontSize_buttonBig: px2rem(30);
+// 小按钮的字体大小
+$fontSize_buttonSmall: px2rem(22);
+// 页面内首要层级信息，基准的，可以是连续的，如列表标题、消息气泡
+$fontSize_title: px2rem(32);
+$fontSize_title24: px2rem(24);
+// 页面内次要描述信息，服务于首要信息并与之关联，如列表摘要
+$fontSize_titleSub: px2rem(28);
+// 页面辅助信息，需弱化的内容，如链接，小按钮
+$fontSize_small: px2rem(24);
+// 说明文本，如版权信息等不需要用户关注的信息
+$fontSize_light: px2rem(20);
+// 最小的文字
+$fontSize_xSmall: px2rem(20);
+
+$fontSize_xxSmall: px2rem(18);
+// padding margin
+$paddingleft28: 0.28rem;
+
+// border radius
+$radius6px: 0.08rem;
+
+//价格字体大小
+$priceFont: px2rem(32);
+
+// 默认行高
+$lineHeight_default: 1.34;
+// 标题行高
+$lineHeight_title: 1.6;
+
+
+//最大宽度
+$maxWidth: 768px;
+
+//共同margintop
+$commonMarginTop:px2rem(90);
+
+%imgCover {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+%bgCenter {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+%maskBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  max-width: $maxWidth;
+  margin:auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+

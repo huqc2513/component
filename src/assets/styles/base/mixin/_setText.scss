@@ -1,0 +1,32 @@
+/// 设置文字宽度不足时省略。
+@mixin setEllipsis($w:auto) {
+  width: $w;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+
+/// 设置文字行数不足时省略。
+@mixin setEllipsisLn($line) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  /* autoprefixer: off */
+  -webkit-box-orient: vertical; // 参考 https://github.com/postcss/autoprefixer/issues/776
+  /* autoprefixer: on */
+  -webkit-line-clamp: $line;
+}
+
+/// 设置文字宽度不足时换行。
+@mixin setText_wrap() {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+/// 设置英文断字符。
+@mixin setHyphens() {
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}

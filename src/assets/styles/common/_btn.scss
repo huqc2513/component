@@ -1,0 +1,175 @@
+@import "../base/fn";
+
+.btn_primary {
+  color: #fff;
+  background: $theme_primary;
+}
+
+.btn_primary:active {
+  background: darken($theme_primary, 30);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/*按钮*/
+.btn, .log-btn {
+  width: 100%;
+}
+.log-btn p{
+  background: $alltheme_color;
+  margin: 0 10%;
+  height: 1.08rem;
+  line-height: 1.08rem;
+  text-align: center;
+  color: #fff;
+  border-radius: 0.1rem;
+  font-size: $fontSize_titleBig;
+  opacity: .9;
+}
+.btn p {
+  background: $theme_primary;
+  margin: 0 10%;
+  height: 1.08rem;
+  line-height: 1.08rem;
+  text-align: center;
+  color: #fff;
+  border-radius: 0.1rem;
+  font-size: $fontSize_titleBig;
+}
+
+.btn p:active {
+  background: darken($theme_primary, 30);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+//联系商家
+.contactBtn {
+  width: 100%;
+  padding: 0.4rem 10%;
+  background: #F3F3F3;
+  font-size: $fontSize_default;
+  .icon {
+    font-size: 1.25em;
+    vertical-align: -0.19em;
+    margin-right: 0.02rem;
+  }
+  p {
+    background: #1E99BD;
+    height: 1.08rem;
+    line-height: 1.08rem;
+    text-align: center;
+    border-radius: 0.187rem;
+    color: #fff;
+    img {
+      width: 0.44rem;
+      height: 0.44rem;
+      vertical-align: middle;
+      margin-top: -0.1rem;
+      margin-right: 0.14rem;
+    }
+
+    &:active {
+      background: #1e7395;
+    }
+  }
+}
+
+//搜索框点击
+.searchBtn {
+  background: #1EBDA7;
+  padding: 0.2rem 0.26rem;
+
+}
+
+%btn {
+  background: $theme_primary;
+  width: 100%;
+  padding: px2rem(15) 0;
+  text-align: center;
+  color: $textColor_forDark;
+  border: 1px solid $theme_primary;
+  border-radius: px2rem(12);
+  font-size: $fontSize_titleBig;
+}
+
+button.btn {
+  @extend %btn;
+}
+
+button.small {
+  font-size: $fontSize_small;
+}
+
+button.btn-warn {
+  @extend %btn;
+  background-color: $warnButtonColor_default;
+  border-color: $warnButtonColor_default;
+  &:not([disabled]):not(.plain):active {
+    background-color: $warnButtonColor_press;
+    border-color: $warnButtonColor_press;
+    color: transparentize(#ffffff, 0.6);
+  }
+  &:not(.plain)[disabled] {
+    background-color: #cccccc;
+    border-color: #cccccc;
+    color: transparentize(#ffffff, 0.4);
+  }
+  &.plain {
+    color: $warnButtonColor_default;
+  }
+}
+
+button.btn-primary {
+  @extend %btn;
+  background-color: $primaryButtonColor_default;
+  border-color: $primaryButtonColor_default;
+  &:not([disabled]):not(.plain):active {
+    background-color: $primaryButtonColor_press;
+    border-color: $primaryButtonColor_press;
+    color: transparentize(#ffffff, 0.6);
+  }
+  &:not(.plain)[disabled] {
+    background-color: #cccccc;
+    border-color: #cccccc;
+    color: #ffffff;
+  }
+  &.plain {
+    color: $primaryButtonColor_default;
+    background-color: transparent;
+    &:not([disabled]):active {
+      opacity: .6;
+    }
+    &[disabled] {
+      opacity: .4;
+    }
+  }
+}
+
+button.btn-sub {
+  @extend %btn;
+  background-color: $subButtonColor_default;
+  border-color: $subButtonColor_default;
+  &:not([disabled]):not(.plain):active {
+    background-color: $subButtonColor_press;
+    border-color: $subButtonColor_press;
+    color: transparentize(#ffffff, 0.6);
+  }
+  &:not(.plain)[disabled] {
+    background-color: #cccccc;
+    border-color: #cccccc;
+    color: transparentize(#ffffff, 0.4);
+  }
+  &.plain {
+    color: $subButtonColor_default;
+  }
+}
+
+button.btn-gray {
+  @extend %btn;
+  background-color: $grayButtonColor_default;
+  border-color: $grayButtonColor_default;
+  &:not([disabled]):not(.plain):active {
+    background-color: $grayButtonColor_press;
+    border-color: $grayButtonColor_press;
+    color: transparentize(#ffffff, 0.6);
+  }
+}

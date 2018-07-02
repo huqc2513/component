@@ -1,0 +1,129 @@
+%icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: -0.1em;
+}
+
+.icon-headerAdd {
+  @extend %icon;
+  background: url("./assets/images/icon_add.png") no-repeat center;
+  background-size: contain;
+}
+
+.icon-addFollow {
+  @extend %icon;
+  background: url("./assets/images/club_addFollow.png") no-repeat center;
+  background-size: contain;
+}
+
+.icon-clubPV {
+  @extend %icon;
+  background: url("./assets/images/club_pv.png") no-repeat center;
+  background-size: contain;
+}
+
+.icon-clubComment {
+  @extend %icon;
+  background: url("./assets/images/club_comment.png") no-repeat center;
+  background-size: contain;
+}
+
+.icon-clubLike {
+  @extend %icon;
+  background: url("./assets/images/club_like.png") no-repeat center;
+  background-size: contain;
+}
+
+.icon-clubUnLike {
+  @extend %icon;
+  background: url("./assets/images/club_unLike.png") no-repeat center;
+  background-size: contain;
+}
+
+.icon-search {
+  @extend %icon;
+  background: url("./assets/images/search.png") no-repeat center;
+  background-size: contain;
+}
+
+.icon_commentLike {
+  @extend %icon;
+  background: url("./assets/images/detail_like.png") no-repeat center;
+  background-size: contain;
+}
+
+.icon_commentUnLike {
+  @extend %icon;
+  background: url("./assets/images/detail_unLike.png") no-repeat center;
+  background-size: contain;
+}
+
+.icon_commentReply {
+  @extend %icon;
+  background: url("./assets/images/detail_reply.png") no-repeat center;
+  background-size: contain;
+}
+
+.icon-formChoosePlace {
+  @extend %icon;
+  background: url("./assets/images/icon_address.png") no-repeat center;
+  background-size: contain;
+}
+
+.icon-success {
+  @extend %icon;
+  background: url("./assets/images/success.svg") no-repeat center;
+  background-size: contain;
+  width: 100%;
+}
+
+.icon-delete {
+  @extend %icon;
+  background: url("./assets/images/icon_delete.svg") no-repeat center;
+  background-size: contain;
+}
+
+.icon-delete2 {
+  @extend %icon;
+  background: url("./assets/images/icon_delete2.svg") no-repeat center;
+  background-size: contain;
+}
+
+.icon {
+  /* 通过设置 font-size 来改变图标大小 */
+  width: 1em;
+  height: 1em;
+  /* 图标和文字相邻时，垂直对齐 */
+  vertical-align: -0.1em;
+  //vertical-align: baseline;
+  /* 通过设置 color 来改变 SVG 的颜色/fill */
+  fill: currentColor;
+  /* path 和 stroke 溢出 viewBox 部分在 IE 下会显示
+     normalize.css 中也包含这行 */
+  overflow: hidden;
+}
+
+.icon-address {
+  color: #FFA169;
+  font-size: 1em;
+  margin-right: 0.08rem;
+}
+
+.icon-phone {
+  color: #5ACC88;
+  margin-right: 0.08rem;
+}
+
+.icon-liulan {
+  color: #B2B2B2;
+  margin-right: 0.08rem;
+}
+
+//.icon-delete {
+//  color: #F60000;
+//  background: #fff;
+//}
+
+

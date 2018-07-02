@@ -1,0 +1,86 @@
+@import "../base/fn";
+
+.form {
+  margin: 0.28rem;
+  border-radius: 0.16rem;
+  & > h1 {
+    padding: 0.2rem 0.533rem;
+    color: #444343;
+    font-size: $fontSize_default;
+    border-bottom: 1px solid $borderColor_default;
+  }
+  background: #fff;
+  & > ul {
+    color: #575757;
+    padding: 0 0 0 0.533rem;
+    li {
+      border-bottom: 1px solid $borderColor_default;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+    .input {
+      position: relative;
+      height: 1.2rem;
+      display: flex;
+      display: -webkit-flex;
+      align-items: center;
+
+      & > p {
+        width: 20%;
+        text-align: left;
+        font-size: $fontSize_titleSub;
+      }
+      input {
+        width: 80%;
+        background: #F0F0F0;
+        border-radius: 0.133rem;
+        color: #575757;
+        padding: 0.17rem 0.24rem;
+        font-size: $fontSize_small;
+        margin-right: 0.24rem;
+      }
+      input::-webkit-input-placeholder {
+        color: #b6b6b6;
+      }
+
+      .city {
+        width: 80%;
+        p {
+          position: relative;
+          background: #F0F0F0;
+          border-radius: 0.053rem;
+          font-size: $fontSize_small;
+          margin-right: 0.3rem;
+          display: inline-block;
+          padding: 0 0.56rem 0 0.22rem;
+          height: px2rem(51);
+          span {
+            line-height: px2rem(51);
+            height: px2rem(51);
+            display: inline-block;
+            text-align: center;
+            width: 1.26rem;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            word-break: break-all;
+          }
+          em {
+            position: absolute;
+            //bottom: 0.22rem;
+            right: 0;
+            margin-right: 0.17rem;
+            margin-left: 0.17rem;
+            border-left: 0.14rem solid transparent;
+            border-right: 0.14rem solid transparent;
+            border-top: 0.18rem solid #565656;
+            top: 50%;
+            transform: translate3d(0, -50%, 0);
+          }
+        }
+      }
+    }
+  }
+}
+

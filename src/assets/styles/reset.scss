@@ -1,0 +1,123 @@
+@import "../../../node_modules/normalize.css/normalize";
+@import "base/fn";
+
+html {
+  background-color: $backgroundColor_backColor;
+  font-family: $fontDefault;
+  font-size: $fontSize_default;
+  color: $textColor_default;
+  font-weight: normal !important;
+}
+
+body {
+  margin: 0;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+  color: $textColor_default;
+}
+
+i {
+  font-style: normal;
+}
+
+* {
+  //box-sizing: border-box;
+  //-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  //word-break: break-all;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+address, b, caption, cite, code, em, figcaption, h1, h2, h3, h4, h5, h6, i, pre, strong, th {
+  font-style: normal
+}
+
+input[type="button"],
+input[type="password"],
+input[type="text"],
+input[type='search'],
+input[type='tel'] {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-radius: 0;
+  padding: 0;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+select {
+  @extend input[type="text"];
+  appearance: none;
+
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+button {
+  @extend input[type="text"];
+}
+
+input, fieldset, iframe {
+  border: none
+}
+
+//:not(input, textarea) {
+//  -webkit-touch-callout: none;
+//  -webkit-user-select: none
+//}
+input {
+  outline: 0;
+  -webkit-tap-highlight-color: transparent
+}
+
+a:focus, a:active, button, input:focus {
+  -webkit-tap-highlight-color: transparent
+}
+
+a, a:active, a:hover, a:link, a:visited {
+  text-decoration: none
+}
+
+textarea:focus {
+  -webkit-tap-highlight-color: transparent;
+  outline: 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-input-placeholder {
+  font-size: $fontSize_titleSub;
+  color: $textColor_light;
+}
+
+:-moz-placeholder {
+  font-size: $fontSize_titleSub;
+  color: $textColor_light;
+}
+
+::-moz-placeholder {
+  font-size: $fontSize_titleSub;
+  color: $textColor_light;
+}
+
+:-ms-input-placeholder {
+  font-size: $fontSize_titleSub;
+  color: $textColor_light;
+}

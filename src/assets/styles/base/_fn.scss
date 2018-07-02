@@ -1,0 +1,48 @@
+//function
+@import "function/px2rem";
+//mixin
+@import "mixin/setBorder";
+@import "mixin/setBg";
+@import "mixin/setArrow";
+@import "mixin/setText";
+@import "mixin/setBannerPt";
+@import "mixin/setHeightEqualToWidth";
+@import "mixin/setFlex";
+@import "mixin/setFixedBtnColumn";
+@import "mixin/setTransition";
+//variable
+@import "variable/global";
+@import "variable/color";
+@import "variable/flex";
+@import "variable/jxh_standard";
+@import "variable/zIndex";
+
+
+$maxWidth:768px;
+
+.noPrice {
+  color: $priceColor;
+  font-size: px2rem(20);
+  line-height: px2rem(42);
+}
+
+.priceFontSize {
+  font-size: px2rem(20);
+}
+
+.rmb-icon {
+  font-size: px2rem(20);
+  margin-right: px2rem(3);
+}
+
+.label {
+  color: #F5B44A;
+  display: inline-block;
+  border: 1px solid #F5B44A;
+  font-size: px2rem(18);
+  border-radius: px2rem(4);
+  margin-right: px2rem(7);
+  line-height: px2rem(22);
+  margin-top: px2rem(5);
+  padding: px2rem(4) px2rem(10) 0;
+}

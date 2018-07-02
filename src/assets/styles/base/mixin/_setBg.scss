@@ -1,0 +1,49 @@
+/// 设置渐变背景的参数检查。
+/// @param {number} $angle
+/// @param {color|list} $color
+/// @param {string} $functionName
+@function _checkSetBg($angle,$color,$functionName) {
+  $isOK: true;
+  @if unit($angle)!='deg' {
+    $isOK: false;
+    @error 'Wrong syntax for #{$functionName}. Use a angle for $angle.';
+  }
+  @if length($color)==0 {
+    $isOK: false;
+    @error 'Wrong syntax for #{$functionName}. Use a color list for $color.';
+  } @else {
+    @each $i in $color {
+      @if type-of($i)!='color' {
+        $isOK: false;
+        @error 'Wrong syntax for #{$functionName}. Use a color list for $color.';
+      }
+    }
+  }
+  @return $isOK;
+}
+
+/// 设置线性等分渐变背景。
+/// @param {number} [$angle=180deg] 渐变角度
+/// @param {color|list} $color 渐变角度
+@mixin setLinearGradient($list...) {
+  $angle: 180deg;
+  $start: 1;
+  $len: length($list);
+  $color: ();
+  @if type-of(nth($list,1))!='color' {
+    $angle: nth($list, 1);
+    $start: 2;
+  }
+  @for $i from $start through $len {
+    $color: append($color, nth($list, $i), comma);
+  }
+  @if _checkSetBg($angle, $color, 'setLinearGradient') {
+    $colorLen: length($color);
+    @if $colorLen==1 {
+      @warn '$color is only one param';
+      background-color: $color;
+    } @else {
+      background: linear-gradient($angle, $color) nth($color, $start);
+    }
+  }
+}

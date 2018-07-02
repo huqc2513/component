@@ -1,0 +1,106 @@
+@import "../variable/color";
+@import "../function/checkInput";
+
+/// 设置边框的参数检查。
+/// @param {color} $color
+/// @param {number} $width
+/// @param {string} $style
+/// @param {number} $padding
+/// @param {string} $functionName
+@function _checkSetBorder($color,$width,$style,$padding,$functionName) {
+  $isOK: true;
+  @if type-of($color)!='color' {
+    $isOK: false;
+    @error 'Wrong syntax for #{$functionName}. Use a color for $color.';
+  }
+  @if type-of($width)!='number' {
+    $isOK: false;
+    @error 'Wrong syntax for #{$functionName}. Use a number, decimal, or percentage for $width.';
+  }
+  @if type-of($style)!='string' {
+    $isOK: false;
+    @error 'Wrong syntax for #{$functionName}. Use a string for $style.';
+  } @else if checkBorderStyle($style)==false {
+    $isOK: false;
+    @error 'Wrong values for #{$functionName}. Use a border-style attribute value for $style.';
+  }
+  @if type-of($padding)!='number' {
+    $isOK: false;
+    @error 'Wrong syntax for #{$functionName}. Use a number, decimal, or percentage for $style.';
+  }
+  @return $isOK;
+}
+
+/// 设置边框的公共部分。
+/// @param {color} $color 边框颜色
+@mixin _setBorder($color) {
+  content: "";
+  position: absolute;
+  color: $color;
+  overflow: hidden;
+}
+
+/// 设置顶部边框，请用after或before添加。
+/// @param {color} [$color=$borderColor_default] 边框颜色
+/// @param {number} [$width=1px] 边框宽度
+/// @param {string} [$style=solid] 边框样式（枚举）
+/// @param {number} [$padding=0] 可统一设置左右缩进
+@mixin setBorderTop($color:$borderColor_default,$width:1px,$style:solid,$padding:0) {
+  @if _checkSetBorder($color, $width, $style, $padding, 'setBorderTop') {
+    @include _setBorder($color);
+    left: $padding;
+    top: 0;
+    right: $padding;
+    height: 1px;
+    border-top: $width $style $color;
+  }
+;
+}
+
+/// 设置底部边框，请用after或before添加。
+/// @param {color} [$color=$borderColor_default] 边框颜色
+/// @param {number} [$width=1px] 边框宽度
+/// @param {string} [$style=solid] 边框样式（枚举）
+/// @param {number} [$padding=0] 可统一设置左右缩进
+@mixin setBorderBottom($color:$borderColor_default,$width:1px,$style:solid,$padding:0) {
+  @if _checkSetBorder($color, $width, $style, $padding, 'setBorderBottom') {
+    @include _setBorder($color);
+    left: $padding;
+    bottom: 0;
+    right: $padding;
+    height: 1px;
+    border-bottom: $width $style #ececec;
+  }
+}
+
+/// 设置左部边框，请用after或before添加。
+/// @param {color} [$color=$borderColor_default] 边框颜色
+/// @param {number} [$width=1px] 边框宽度
+/// @param {string} [$style=solid] 边框样式（枚举）
+/// @param {number} [$padding=0] 可统一设置上下缩进
+@mixin setBorderLeft($color:$borderColor_default,$width:1px,$style:solid,$padding:0) {
+  @if _checkSetBorder($color, $width, $style, $padding, 'setBorderLeft') {
+    @include _setBorder($color);
+    left: 0;
+    top: $padding;
+    bottom: $padding;
+    width: 1px;
+    border-left: $width $style $color;
+  }
+}
+
+/// 设置右部边框，请用after或before添加。
+/// @param {color} [$color=$borderColor_default] 边框颜色
+/// @param {number} [$width=1px] 边框宽度
+/// @param {string} [$style=solid] 边框样式（枚举）
+/// @param {number} [$padding=0] 可统一设置上下缩进
+@mixin setBorderRight($color:$borderColor_default,$width:1px,$style:solid,$padding:0) {
+  @if _checkSetBorder($color, $width, $style, $padding, 'setBorderRight') {
+    @include _setBorder($color);
+    right: 0;
+    top: $padding;
+    bottom: $padding;
+    width: 1px;
+    border-right: $width $style $color;
+  }
+}

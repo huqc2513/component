@@ -1,0 +1,488 @@
+.emoji {
+  width: 1.1em;
+  height: 1.1em;
+  display: inline-block;
+  /* vertical-align: top; */
+  vertical-align: -0.15em;
+}
+
+//.emoji-base {
+//  background: url("./assets/images/emoji.png") no-repeat;
+//  background-size: 1100% 400%;
+//}
+//
+//.emoji-ok_hand {
+//  @extend .emoji-base;
+//  background-position: 0 0;
+//}
+//.emoji-angry {
+//  @extend .emoji-base;
+//  background-position: 10% 0;
+//}
+//.emoji-blush {
+//  @extend .emoji-base;
+//  background-position: 20% 0;
+//}
+//.emoji-broken_heart {
+//  @extend .emoji-base;
+//  background-position: 30% 0;
+//}
+//.emoji-clap {
+//  @extend .emoji-base;
+//  background-position: 40% 0;
+//}
+//.emoji-cold_sweat {
+//  @extend .emoji-base;
+//  background-position: 50% 0;
+//}
+//.emoji-confounded {
+//  @extend .emoji-base;
+//  background-position: 60% 0;
+//}
+//.emoji-disappointed_relieved {
+//  @extend .emoji-base;
+//  background-position: 70% 0;
+//}
+//.emoji-dizzy_face {
+//  @extend .emoji-base;
+//  background-position: 80% 0;
+//}
+//.emoji-expressionless {
+//  @extend .emoji-base;
+//  background-position: 90% 0;
+//}
+//.emoji-flushed {
+//  @extend .emoji-base;
+//  background-position: 100% 0;
+//}
+//
+//.emoji-ghost {
+//  @extend .emoji-base;
+//  background-position: 0 33%;
+//}
+//.emoji-grin {
+//  @extend .emoji-base;
+//  background-position: 10% 33%;
+//}
+//.emoji-heart_eyes {
+//  @extend .emoji-base;
+//  background-position: 20% 33%;
+//}
+//.emoji-heart {
+//  @extend .emoji-base;
+//  background-position: 30% 33%;
+//}
+//.emoji-hibiscus {
+//  @extend .emoji-base;
+//  background-position: 40% 33%;
+//}
+//.emoji-innocent {
+//  @extend .emoji-base;
+//  background-position: 50% 33%;
+//}
+//.emoji-joy {
+//  @extend .emoji-base;
+//  background-position: 60% 33%;
+//}
+//.emoji-kissing_heart {
+//  @extend .emoji-base;
+//  background-position: 70% 33%;
+//}
+//.emoji-laughing {
+//  @extend .emoji-base;
+//  background-position: 80% 33%;
+//}
+//.emoji-dizzy_face {
+//  @extend .emoji-base;
+//  background-position: 90% 33%;
+//}
+//.emoji-relaxed {
+//  @extend .emoji-base;
+//  background-position: 100% 33%;
+//}
+//
+//.emoji-relieved {
+//  @extend .emoji-base;
+//  background-position: 0 67%;
+//}
+//.emoji-scream{
+//  @extend .emoji-base;
+//  background-position: 10% 67%;
+//}
+//.emoji-sleeping {
+//  @extend .emoji-base;
+//  background-position: 20% 67%;
+//}
+//.emoji-sleepy{
+//  @extend .emoji-base;
+//  background-position: 30% 67%;
+//}
+//.emoji-smile {
+//  @extend .emoji-base;
+//  background-position: 40% 67%;
+//}
+//.emoji-sob{
+//  @extend .emoji-base;
+//  background-position: 50% 67%;
+//}
+//.emoji-sparkles {
+//  @extend .emoji-base;
+//  background-position: 60% 67%;
+//}
+//.emoji-stuck_out_tongue_winking_eye{
+//  @extend .emoji-base;
+//  background-position: 70% 67%;
+//}
+//.emoji-sun_with_face {
+//  @extend .emoji-base;
+//  background-position: 80% 67%;
+//}
+//.emoji-sunflower{
+//  @extend .emoji-base;
+//  background-position: 90% 67%;
+//}
+//
+//
+//.emoji-sunglasses{
+//  @extend .emoji-base;
+//  background-position: 100% 67%;
+//}
+//.emoji-sunny {
+//  @extend .emoji-base;
+//  background-position: 0 100%;
+//}
+//.emoji-sweat{
+//  @extend .emoji-base;
+//  background-position: 10% 100%;
+//}
+//.emoji-thumbsup {
+//  @extend .emoji-base;
+//  background-position: 20% 100%;
+//}
+//
+//.emoji-triumph {
+//  @extend .emoji-base;
+//  background-position: 30% 100%;
+//}
+//
+//.emoji-unamused {
+//  @extend .emoji-base;
+//  background-position: 40% 100%;
+//}
+//
+//.emoji-wink{
+//  @extend .emoji-base;
+//  background-position: 50% 100%;
+//}
+//
+//.emoji-yum{
+//  @extend .emoji-base;
+//  background-position: 60% 100%;
+//}
+
+@mixin _createEmoji($name) {
+  background: url("./assets/images/emoji/" + $name + ".png") no-repeat;
+  background-size: 100% 100%;
+}
+
+.emoji-ok_hand {
+  @include _createEmoji("ok_hand");
+}
+
+.emoji-angry {
+  @include _createEmoji("angry");
+}
+
+.emoji-blush {
+  @include _createEmoji("blush");
+}
+
+.emoji-broken_heart {
+  @include _createEmoji("broken_heart");
+}
+
+.emoji-clap {
+  @include _createEmoji("clap");
+}
+
+.emoji-cold_sweat {
+  @include _createEmoji("cold_sweat");
+}
+
+.emoji-confounded {
+  @include _createEmoji("confounded");
+}
+
+//.emoji-disappointed_relieved {
+//  @include _createEmoji("disappointed_relieved");
+//}
+.emoji-disappointed {
+  @include _createEmoji("disappointed");
+}
+
+.emoji-dizzy_face {
+  @include _createEmoji("dizzy_face");
+}
+
+.emoji-expressionless {
+  @include _createEmoji("expressionless");
+}
+
+.emoji-flushed {
+  @include _createEmoji("flushed");
+}
+
+.emoji-ghost {
+  @include _createEmoji("ghost");
+}
+
+.emoji-grin {
+  @include _createEmoji("grin");
+}
+
+.emoji-heart_eyes {
+  @include _createEmoji("heart_eyes");
+}
+
+.emoji-heart {
+  @include _createEmoji("heart");
+}
+
+.emoji-hibiscus {
+  @include _createEmoji("hibiscus");
+}
+
+.emoji-innocent {
+  @include _createEmoji("innocent");
+}
+
+.emoji-joy {
+  @include _createEmoji("joy");
+}
+
+.emoji-kissing_heart {
+  @include _createEmoji("kissing_heart");
+}
+
+.emoji-laughing {
+  @include _createEmoji("laughing");
+}
+
+.emoji-dizzy_face {
+  @include _createEmoji("dizzy_face");
+}
+
+.emoji-relaxed {
+  @include _createEmoji("relaxed");
+}
+
+.emoji-relieved {
+  @include _createEmoji("relieved");
+}
+
+.emoji-scream {
+  @include _createEmoji("scream");
+}
+
+.emoji-sleeping {
+  @include _createEmoji("sleeping");
+}
+
+.emoji-sleepy {
+  @include _createEmoji("sleepy");
+}
+
+.emoji-smile {
+  @include _createEmoji("smile");
+}
+
+.emoji-sob {
+  @include _createEmoji("sob");
+}
+
+.emoji-sparkles {
+  @include _createEmoji("sparkles");
+}
+
+.emoji-stuck {
+  @include _createEmoji("stuck");
+}
+
+//.emoji-stuck_out_tongue_winking_eye{
+//  @include _createEmoji("stuck_out_tongue_winking_eye");
+//}
+.emoji-sun_with_face {
+  @include _createEmoji("sun_with_face");
+}
+
+.emoji-sunflower {
+  @include _createEmoji("sunflower");
+}
+
+.emoji-sunglasses {
+  @include _createEmoji("sunglasses");
+}
+
+.emoji-sunny {
+  @include _createEmoji("sunny");
+}
+
+.emoji-sweat {
+  @include _createEmoji("sweat");
+}
+
+.emoji-thumbsup {
+  @include _createEmoji("thumbsup");
+}
+
+.emoji-triumph {
+  @include _createEmoji("triumph");
+}
+
+.emoji-unamused {
+  @include _createEmoji("unamused");
+}
+
+.emoji-wink {
+  @include _createEmoji("wink");
+}
+
+.emoji-yum {
+  @include _createEmoji("yum");
+}
+
+//
+//.emoji-anguished {
+//  background: url("./assets/images/emoji/anguished.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-astonished {
+//  background: url("./assets/images/emoji/astonished.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//
+//.emoji-confounded {
+//  background: url("./assets/images/emoji/confounded.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-disappointed {
+//  background: url("./assets/images/emoji/disappointed.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-disappointed_relieved {
+//  background: url("./assets/images/emoji/disappointed_relieved.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-dizzy_face {
+//  background: url("./assets/images/emoji/dizzy_face.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-expressionless {
+//  background: url("./assets/images/emoji/expressionless.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-fearful {
+//  background: url("./assets/images/emoji/fearful.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-flushed {
+//  background: url("./assets/images/emoji/flushed.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-grin {
+//  background: url("./assets/images/emoji/grin.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-innocent {
+//  background: url("./assets/images/emoji/innocent.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-joy {
+//  background: url("./assets/images/emoji/joy.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-kissing_closed_eyes {
+//  background: url("./assets/images/emoji/kissing_closed_eyes.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-kissing_heart {
+//  background: url("./assets/images/emoji/kissing_heart.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-laughing {
+//  background: url("./assets/images/emoji/laughing.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-mask {
+//  background: url("./assets/images/emoji/mask.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-relieved {
+//  background: url("./assets/images/emoji/relieved.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-scream {
+//  background: url("./assets/images/emoji/scream.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-sleeping {
+//  background: url("./assets/images/emoji/sleeping.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-sleepy {
+//  background: url("./assets/images/emoji/sleepy.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-smile {
+//  background: url("./assets/images/emoji/smile.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-smiling_imp {
+//  background: url("./assets/images/emoji/smiling_imp.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-sob {
+//  background: url("./assets/images/emoji/sob.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-stuck_out_tongue {
+//  background: url("./assets/images/emoji/stuck_out_tongue.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-stuck_out_tongue_closed_eyes {
+//  background: url("./assets/images/emoji/stuck_out_tongue_closed_eyes.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-stuck_out_tongue_winking_eye {
+//  background: url("./assets/images/emoji/stuck_out_tongue_winking_eye.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-sweat {
+//  background: url("./assets/images/emoji/sweat.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-triumph {
+//  background: url("./assets/images/emoji/triumph.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-unamused {
+//  background: url("./assets/images/emoji/unamused.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-weary {
+//  background: url("./assets/images/emoji/weary.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-wink {
+//  background: url("./assets/images/emoji/wink.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-worried {
+//  background: url("./assets/images/emoji/worried.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//.emoji-yum {
+//  background: url("./assets/images/emoji/yum.png") no-repeat;
+//  background-size: 100% 100%;
+//}
+//

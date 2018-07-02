@@ -1,0 +1,8 @@
+/// 设置高等于宽。
+@mixin setHeightEqualToWidth() {
+  &:before {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+}

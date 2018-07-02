@@ -1,0 +1,88 @@
+@import "../variable/color";
+@import "../function/px2rem";
+
+/// 设置箭头图标的参数检查。
+/// @param {number} $arrowSize
+/// @param {color} $borderColor
+/// @param {number} $borderWidth
+/// @param {string} $functionName
+@function _checkSetArrow($arrowSize, $borderColor, $borderWidth,$functionName) {
+  $isOK: true;
+  @if type-of($borderColor)!='color' {
+    $isOK: false;
+    @error 'Wrong syntax for #{$functionName}. Use a color for $borderColor.';
+  }
+  @if type-of($arrowSize)!='number' {
+    $isOK: false;
+    @error 'Wrong syntax for #{$functionName}. Use a number, decimal, or percentage for $arrowSize.';
+  }
+  @if type-of($borderWidth)!='number' {
+    $isOK: false;
+    @error 'Wrong syntax for #{$functionName}. Use a number, decimal, or percentage for $borderWidth.';
+  }
+  @return $isOK;
+}
+
+/// 设置箭头图标的公共部分。
+/// @param {number} $arrowSize
+/// @param {color} $borderColor
+/// @param {number} $borderWidth
+@mixin _setArrow($arrowSize, $borderColor, $borderWidth) {
+  display: inline-block;
+  height: $arrowSize;
+  width: $arrowSize;
+  border-width: $borderWidth $borderWidth 0 0;
+  border-color: $borderColor;
+  border-style: solid;
+  vertical-align: middle;
+}
+
+/// 设置向上箭头图标
+/// @param {number} [$arrowSize=0.4em] 设置箭头图标的大小
+/// @param {color} [$borderColor=$textColor_default] 设置箭头图标的颜色
+/// @param {string} [$borderWidth=px2rem(4)] 设置箭头图标的宽度
+@mixin setArrowTop($arrowSize:0.4em, $borderColor:$textColor_default, $borderWidth:px2rem(4)) {
+  @if _checkSetArrow($arrowSize, $borderColor, $borderWidth, 'setArrowTop') {
+    @include _setArrow($arrowSize, $borderColor, $borderWidth);
+    transform: matrix(0.71, -0.71, 0.71, 0.71, 0, 0); // rotate(-45deg)
+  }
+}
+
+/// 设置向下箭头图标
+/// @param {number} [$arrowSize=0.4em] 设置箭头图标的大小
+/// @param {color} [$borderColor=$textColor_default] 设置箭头图标的颜色
+/// @param {string} [$borderWidth=px2rem(4)] 设置箭头图标的宽度
+@mixin setArrowBottom($arrowSize:0.4em, $borderColor:$textColor_default, $borderWidth:px2rem(4)) {
+  @if _checkSetArrow($arrowSize, $borderColor, $borderWidth, 'setArrowBottom') {
+    @include _setArrow($arrowSize, $borderColor, $borderWidth);
+    transform: matrix(-0.71, 0.71, -0.71, -0.71, 0, 0); // rotate(135deg);
+    position: relative;
+    top: px2rem(-3);
+  }
+}
+
+/// 设置向右箭头图标
+/// @param {number} [$arrowSize=0.4em] 设置箭头图标的大小
+/// @param {color} [$borderColor=$textColor_default] 设置箭头图标的颜色
+/// @param {string} [$borderWidth=px2rem(4)] 设置箭头图标的宽度
+@mixin setArrowRight($arrowSize:0.4em, $borderColor:$textColor_default, $borderWidth:px2rem(4)) {
+  @if _checkSetArrow($arrowSize, $borderColor, $borderWidth, 'setArrowRight') {
+    @include _setArrow($arrowSize, $borderColor, $borderWidth);
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0); // rotate(45deg);
+    position: relative;
+    top: px2rem(-3);
+  }
+}
+
+/// 设置向左箭头图标
+/// @param {number} [$arrowSize=0.4em] 设置箭头图标的大小
+/// @param {color} [$borderColor=$textColor_default] 设置箭头图标的颜色
+/// @param {string} [$borderWidth=px2rem(4)] 设置箭头图标的宽度
+@mixin setArrowLeft($arrowSize:0.4em, $borderColor:$textColor_default, $borderWidth:px2rem(4)) {
+  @if _checkSetArrow($arrowSize, $borderColor, $borderWidth, 'setArrowLeft') {
+    @include _setArrow($arrowSize, $borderColor, $borderWidth);
+    transform: matrix(-0.71, -0.71, 0.71, -0.71, 0, 0); // rotate(-135deg);
+    position: relative;
+    top: px2rem(-3);
+  }
+}

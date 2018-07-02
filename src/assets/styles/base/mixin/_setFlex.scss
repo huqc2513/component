@@ -1,0 +1,25 @@
+@import "../variable/color";
+@import "../function/checkInput";
+
+%flex {
+  display: flex;
+}
+
+@mixin setFlex {
+  @extend %flex;
+}
+
+@mixin setFlexColumn {
+  @include setFlex;
+  flex-direction: column;
+}
+
+@mixin setFlexRow {
+  @include setFlex;
+  align-items: center;
+}
+
+@mixin setFlexCenter {
+  @include setFlexRow;
+  justify-content: center;
+}

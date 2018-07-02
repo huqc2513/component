@@ -1,0 +1,13 @@
+@import "../base/variable/color";
+
+.theme_primary {
+  color: $theme_primary;
+}
+
+.theme_primary_bg {
+  background-color: $theme_primary;
+}
+
+.textColor_warn {
+  color: $theme_warn;
+}

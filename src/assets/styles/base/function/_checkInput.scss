@@ -1,0 +1,19 @@
+@import "../variable/attribute";
+
+/// 检查border-style的参数是否合法
+/// @param {string} $style
+@function checkBorderStyle($style) {
+  $isStyle: false;
+  @each $attr in $_borderStyle {
+    @if $attr==$style {
+      $isStyle: true;
+    }
+  }
+  @return $isStyle;
+}
+
+/// 去掉单位
+/// @param {number} $number
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}

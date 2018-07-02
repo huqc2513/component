@@ -1,0 +1,327 @@
+@import "reset";
+@import "common/btn";
+@import "common/btn_icon";
+@import "common/flex";
+@import "common/swiper";
+@import "common/mt";
+@import "common/icon";
+@import "common/transition";
+@import "common/emoji";
+@import "common/mintUi";
+@import "common/color";
+
+#html-content {
+  overflow: hidden;
+  width: 100%;
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+.margin-header {
+  padding-top: $commonMarginTop !important;
+}
+.hover {
+  background: rgba(228, 57, 57, .4);
+}
+.rich_media {
+  padding: 0 px2rem(20);
+  padding-top: px2rem(10);
+  img {
+    width: 100%;
+    height: auto;
+    margin: px2rem(5) 0;
+  }
+}
+.country-detail a, .country-detail span, .country-detail p {
+  text-decoration: none !important;
+  //color: #666 !important;
+  font-size: px2rem(28) !important;
+  line-height: px2rem(45) !important;
+}
+.country-detail{
+  img{
+    width:100%;
+  }
+}
+
+/*复选框、图片text与文本对齐*/
+.detail-all-detail img {
+  width: 100% !important;
+  height: auto !important;
+  margin: px2rem(10) 0;
+}
+
+.detail-all-detail {
+  line-height: px2rem(36);
+  color: #323332;
+  font-size: px2rem(24);
+}
+
+.trueMiddleAlign {
+  vertical-align: middle;
+  margin-top: -2px;
+  margin-bottom: 1px;
+}
+
+/*绝对定位垂直居中*/
+.absoluteMiddle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+/*文字省略*/
+.text-overflow {
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: break-all;
+}
+
+/*清除浮动*/
+.clearfix:after {
+  content: '';
+  display: block;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+  zoom: 1;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+//没有内容显示
+.noData {
+  position: relative;
+  margin: 1.5rem 2rem;
+  border-top: 1px solid #858282;
+  text-align: center;
+  font-size: 0.4rem;
+}
+
+.noData span {
+  position: relative;
+  top: -0.6em;
+  display: inline-block;
+  background: #F3F3F3;
+  padding: 0 0.2rem;
+}
+
+.data-none {
+  height: px2rem(160);
+  width: 100%;
+  @extend %flexCenter;
+  background: #fff;
+  font-size: px2rem(26);
+  color: #999;
+}
+
+//富文本格式处理
+//富文本格式处理
+.richText {
+  color: #4c4c4c;
+  font-size: px2rem(32);
+  h1, h2, h3 {
+    line-height: 1.4;
+  }
+  p {
+    line-height: 1.5;
+  }
+  img {
+    width: 100%;
+    max-width: 100%;
+    height: auto !important;
+    margin: px2rem(8) 0;
+  }
+  * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    -webkit-box-sizing: border-box !important;
+    word-wrap: break-word !important;
+  }
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+// vue-lazyload
+.lazyImg {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  transition: opacity 0.2s ease;
+  opacity: 0;
+}
+
+.lazyImg[lazy=loaded] {
+  opacity: 1;
+}
+
+// page fixed
+
+// vue-lazyload
+.image-lazy {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  transition: opacity 0.2s ease;
+  opacity: 0;
+}
+
+.image-lazy[lazy=loaded] {
+  opacity: 1;
+}
+
+.popup-mask {
+  position: fixed;
+  @extend %maskBg;
+  background: transparent;
+}
+
+.mark-required {
+  color: #ff2831;
+  margin-left: 0.02rem;
+}
+
+// 更多联系方式
+.popup-contact-more {
+  ul {
+    width: 100%;
+    display: flex;
+    & > li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin: 0 0.4rem;
+      .img-box {
+        width: px2rem(118);
+        height: px2rem(118);
+        border-radius: 50%;
+        border: 2px solid #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        //.qq {
+        //  background: url("./assets/images/common/icon_contact_qq.png") no-repeat;
+        //  width: px2rem(66);
+        //  height: px2rem(80);
+        //  background-size: 100%;
+        //}
+        //.wx {
+        //  background: url("./assets/images/common/icon_contact_weixin.png") no-repeat;
+        //  width: px2rem(72);
+        //  height: px2rem(58);
+        //  background-size: 100%;
+        //}
+      }
+      p {
+        text-align: center;
+        font-size: px2rem(28);
+        color: #212121;
+        padding-top: px2rem(20);
+        line-height: 1.3;
+        width: 100%;
+        & > input {
+          text-align: center;
+          width: 100%;
+        }
+      }
+
+    }
+  }
+  .tip {
+    color: red;
+    font-size: 0.3rem;
+    margin-top: 0.4rem;
+    text-align: center;
+  }
+}
+
+.no-data-icon {
+  text-align: center;
+  padding: 3.2rem 0 2rem;
+  color: #c2c2c2;
+  .icon {
+    font-size: 2.5rem;
+  }
+  p {
+    padding-top: 0.6rem;
+    font-size: 0.48rem;
+  }
+}
+
+.screenHeight {
+  height: 100vh;
+}
+
+body {
+  max-width: $maxWidth;
+  margin: auto;
+}
+
+.space-bottom {
+  height: px2rem(100);
+  background: #F0F2F5;
+}
+
+.negotiateText p {
+  line-height: px2rem(40)
+}
+
+/*通用引导app扩展空白*/
+.guide-margin-top {
+  height: px2rem(100);
+  width: 100%;
+}
+
+.mint-datetime-cancel {
+  color: #666 !important;
+}
+
+.mint-datetime-confirm {
+  color: #F59901 !important;
+}
+
+.picker-toolbar {
+  background: #ECECEC;
+}
+
+.mint-datetime-action {
+  width: auto !important;
+}
+
+.picker-toolbar {
+  display: flex;
+  padding: 0 px2rem(50);
+  justify-content: space-between;
+  height: px2rem(84) !important;
+  line-height: px2rem(84);
+}
+
+textarea {
+  outline: none;
+  border: 0;
+}
+
+.comHeader{
+  padding-top: px2rem(90);
+}
+//.resource-item-wrap {
+//  //border: 1px solid red;
+//  font-size:px2rem(24) !important;
+//
+//}

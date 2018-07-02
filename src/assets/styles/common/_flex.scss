@@ -1,0 +1,34 @@
+.flex1 {
+  flex: 1;
+}
+
+/*水平居中*/
+.flex-center-items {
+  display: flex;
+  align-items: center;
+}
+
+/*水平居中中心对齐*/
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*垂直居中中心对齐*/
+.flex-center-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+/*水平对齐上方*/
+.flex-start-items {
+  display: flex;
+  align-items: flex-start;
+}

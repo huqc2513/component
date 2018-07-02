@@ -1,0 +1,40 @@
+// size
+// 缺省字体大小，用于表单文字信息，所有文本
+$jxh_fontSize_default: px2rem(30);
+// 只能为阿拉伯数字信息，如金额、时间等
+$jxh_fontSize_titleBiggest: px2rem(40);
+// 大标题，用于资源列表的资源标题和分类标题
+$jxh_fontSize_titleBig: px2rem(36);
+// 中等标题
+$jxh_fontSize_titleBigger: px2rem(34);
+// 标准标题，用于表单文字信息、所有的文本信息
+$jxh_fontSize_title: px2rem(32);
+// 页面内次要描述信息，服务于首要信息并与之关联，如列表摘要
+$jxh_fontSize_titleSub: px2rem(28);
+// 页面辅助信息，需弱化的内容，如链接，小按钮
+$jxh_fontSize_small: px2rem(26);
+// 说明文本，需关注
+$jxh_fontSize_desc: px2rem(24);
+// 说明文本，如版权信息等不需要用户关注的信息
+$jxh_fontSize_light: px2rem(22);
+// 最小文字
+$jxh_fontSize_xSmall: px2rem(20);
+
+// 颜色
+$jxh_textColor_titleDeep: #000;
+// 标题颜色
+$jxh_textColor_title: #222222;
+// 不重要内容颜色
+$jxh_textColor_light: #999999;
+$jxh_textColor_node: #666666;
+// 次要内容颜色
+$jxh_textColor_sub: #4c4c4c;
+/*价钱颜色*/
+$jxh_textColor_price: #ff2e33;
+
+//用于边框，分割线等
+$jxh_lineColor_default: #cccccc;
+$jxh_lineColor_sub: #d9d9d9;
+
+// 辅助信息
+$jxh_fontSize_sub: px2rem(24);

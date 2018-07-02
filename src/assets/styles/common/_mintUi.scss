@@ -1,0 +1,123 @@
+@import "../base/fn";
+
+.mint-toast.is-placebottom {
+  bottom: 2rem !important;
+  padding: px2rem(15) px2rem(20) !important;
+}
+.mint-toast-icon {
+  font-size: px2rem(75) !important;
+}
+.mint-toast {
+  .mint-toast-text {
+    font-size: px2rem(24) !important;
+  }
+}
+.mint-indicator {
+  .mint-indicator-wrapper {
+    padding: 0.4rem !important;
+  }
+  .mint-spinner-snake {
+    width: 0.6rem !important;
+    height: 0.6rem !important;
+  }
+  .mint-indicator-text {
+    font-size: px2rem(24);
+    margin-top: px2rem(15);
+  }
+  .mint-spinner-snake {
+    border: 0.05rem solid transparent;
+  }
+}
+
+.slide-enter, .slide-leave-active {
+  transform: translateX(100%) !important;
+}
+
+.vux-timeline {
+  padding-top: px2rem(30) !important;
+  padding-bottom: px2rem(30) !important;
+}
+
+.vux-timeline-item-content {
+
+  padding-bottom: px2rem(40) !important;
+}
+
+.mint-msgbox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  background-color: #fff;
+  width: 80%;
+  border-radius: px2rem(3);
+  font-size: 16px;
+  -webkit-user-select: none;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.mint-msgbox {
+  width: 64% !important;
+  .mint-msgbox-header {
+    padding: 0.3rem 0 0;
+  }
+  .mint-msgbox-title {
+    font-size: $fontSize_buttonBig;
+  }
+  .mint-msgbox-content {
+    padding: px2rem(10) px2rem(20) px2rem(15);
+    min-height: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: $fontSize_small;
+  }
+  .mint-msgbox-btns {
+    line-height: px2rem(70);
+    height: px2rem(70);
+    .mint-msgbox-btn {
+      line-height: 0;
+      font-size: $fontSize_buttonBig;
+    }
+    .mint-msgbox-confirm {
+      color: $theme_primary;
+    }
+  }
+}
+
+.mint-indicator-mask {
+  z-index: 999;
+}
+
+//vux
+.weui-icon-success-circle {
+  color: #F5B54A !important;
+  font-size: 20px !important;
+}
+
+
+.weui-icon-circle {
+  font-size: 20px !important;
+}
+
+.mint-button--small {
+  font-size: 12px !important;
+  border-radius: 102px !important;
+  padding: 0 20px !important;
+  height: 26px !important;
+}
+
+
+.weui-cell_access{
+  padding: 0 px2rem(20)  !important;
+}
+
+//.weui-cell__hd .weui-label{
+//  font-size: px2rem(26) !important;
+//  color: #666666 !important;
+//}
