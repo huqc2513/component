@@ -6,6 +6,12 @@
                                 {{item}}
                             </div> -->
                     </tabBar> 
+                    <hr>
+                     <p>验证码倒计时</p>
+
+                    <verificationCode >
+                        
+                    </verificationCode >  
             </div>
     </template>
 
@@ -13,12 +19,12 @@
     
     import  { tabBar  }  from '@/components/tabBar/index'
 
-    console.error(tabBar)
-    
+    import verificationCode from '@/components/verificationCode/index'    
 
     export default {
         components:{
             tabBar,
+            verificationCode
         },
         data(){
         return{
