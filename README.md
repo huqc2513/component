@@ -24,8 +24,6 @@ http://112.74.173.191/component/index.html#/test <br><br>
 
 
 
-npm install<br>
-npm run dev<br>
 
 
 
