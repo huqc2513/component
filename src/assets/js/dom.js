@@ -45,6 +45,23 @@ let vendor = (() => {
 })()
 
 
+export function prefixStyle(style) {
+  /* istanbul ignore if */
+  if (vendor === false) {
+    return false
+  }
+
+  if (vendor === 'standard') {
+    if (style === 'transitionEnd') {
+      return 'transitionend'
+    }
+    return style
+  }
+
+  return vendor + style.charAt(0).toUpperCase() + style.substr(1)
+}
+
+
 
 export function niceIn(prop){
   prop.find('i').addClass('niceIn');
@@ -69,21 +86,6 @@ export   function toggleBody(isPin){
 }
 
 
-export function prefixStyle(style) {
-  /* istanbul ignore if */
-  if (vendor === false) {
-    return false
-  }
-
-  if (vendor === 'standard') {
-    if (style === 'transitionEnd') {
-      return 'transitionend'
-    }
-    return style
-  }
-
-  return vendor + style.charAt(0).toUpperCase() + style.substr(1)
-}
 
 
 

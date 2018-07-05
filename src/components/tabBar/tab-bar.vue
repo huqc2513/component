@@ -3,12 +3,12 @@
     <slot>
       <cube-tab
         v-for="(item,index) in data"
-        :label="item.label"
+        :item="item"
         :icon="item.icon"
         :key="index">
       </cube-tab>
     </slot>
-    <div v-if="showSlider" ref="slider" class="cube-tab-bar-slider"></div>
+    <div v-if="showSlider" ref="slider" class="cube-tab-bar-slider" :style="{backgroundColor:activeColor}"></div>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -48,6 +48,14 @@
       CubeTab
     },
     props: {
+      color:{
+        type:String,
+        default:`#666`
+      },
+      activeColor:{
+        type:String,
+        default:'#FF9900'
+      },
       value: {
         type: [String, Number],
         required: true
@@ -73,7 +81,7 @@
     },
     created () {
       this.tabs = []
-      console.error(this.showSlider)
+   
     },
     mounted () {
       this._updateSliderStyle()
@@ -87,23 +95,19 @@
         if (index > -1) this.tabs.splice(index, 1)
       },
       trigger (label) {
-        this.$emit(EVENT_CLICK, label)
-        if (label !== this.value) {
-          const changedEvents = [EVENT_INPUT, EVENT_CHANGE]
-          changedEvents.forEach((eventType) => {
-            this.$emit(eventType, label)
-          })
-        }
+         let index=this.data.indexOf(label)
+
+         this.$emit(EVENT_CHANGE, label,index)
+
       },
       _updateSliderStyle () {
-
         if (!this.showSlider) return
         const slider = this.$refs.slider
         this.$nextTick(() => {
-            //拿到每个tab的宽度和下标
-          const { width, index } = this._getSliderWidthAndIndex()
+    
+          const { width } = this._getSliderWidthAndIndex()
           slider.style.width = `${width}px`
-          this.setSliderTransform(this._getOffsetLeft(index))
+           this.setSliderTransform(this._getOffsetLeft(this.value))
         })
       },
       setSliderTransform (offset) {
@@ -120,10 +124,11 @@
       _getSliderWidthAndIndex () {
         let width = 0
         let index = 0
-        if (this.tabs.length > 0) {
-          index = findIndex(this.tabs, (tab) => tab.label === this.value)
-          width = this.tabs[index].$el.clientWidth
-        }
+          this.tabs.forEach((e,i)=>{
+              if(i<=this.value && e.$el){
+                       width=  e.$el.clientWidth
+                }
+          })
         return {
           width,
           index
@@ -133,7 +138,11 @@
       _getOffsetLeft (index) {
         let offsetLeft = 0
         this.tabs.forEach((tab, i) => {
-          if (i < index) offsetLeft += tab.$el.clientWidth
+          if (i < index){
+            if(tab.$el){
+            offsetLeft += tab.$el.clientWidth
+            }
+          } 
         })
         return offsetLeft
       }
@@ -166,7 +175,7 @@
     bottom: 0;
     height: 2px;
     width: 20px;
-    background-color:#2F5FEA;
+    // background-color:#2F5FEA;
   }
 
 
