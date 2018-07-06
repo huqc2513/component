@@ -101,3 +101,19 @@ export function getMatchedTarget(e, targetClassName) {
 }
 
 
+
+
+export function findIndex(ary, fn) {
+  if (ary.findIndex) {
+      return ary.findIndex(fn)
+  }
+  let index = -1
+  ary.some(function (item, index, ary) {
+      const ret = fn.call(this, item, index, ary)
+      if (ret) {
+      index = i
+      return ret
+      }
+  })
+    return index
+  }

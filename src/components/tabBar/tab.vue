@@ -8,13 +8,12 @@
       <i :class="icon"></i>
     </slot>
     <slot>
-      <!-- v-html="item" -->
       <div >{{item.label}}</div>
     </slot>
   </div>
 </template>
 <script type="text/ecmascript-6">
-  const COMPONENT_NAME = 'cube-tab'
+  const COMPONENT_NAME = 'tab'
 
 
 

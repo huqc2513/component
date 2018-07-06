@@ -1,12 +1,7 @@
 <template>
   <div class="cube-tab-bar" :class="{'cube-tab-bar_inline': inline}">
     <slot>
-      <cube-tab
-        v-for="(item,index) in data"
-        :item="item"
-        :icon="item.icon"
-        :key="index">
-      </cube-tab>
+     
     </slot>
     <div v-if="showSlider" ref="slider" class="cube-tab-bar-slider" :style="{backgroundColor:activeColor}"></div>
   </div>
@@ -14,20 +9,7 @@
 <script type="text/ecmascript-6">
 
 
-    function findIndex(ary, fn) {
-    if (ary.findIndex) {
-        return ary.findIndex(fn)
-    }
-    let index = -1
-    ary.some(function (item, i, ary) {
-        const ret = fn.call(this, item, i, ary)
-        if (ret) {
-        index = i
-        return ret
-        }
-    })
-    return index
-    }
+   
 
 
   import { prefixStyle } from '@/assets/js/dom'
@@ -47,6 +29,7 @@
     components: {
       CubeTab
     },
+
     props: {
       color:{
         type:String,
@@ -96,11 +79,16 @@
       },
       trigger (label) {
          let index=this.data.indexOf(label)
-
-         this.$emit(EVENT_CHANGE, label,index)
+          if (index !== this.value) {
+              const changedEvents = [EVENT_INPUT, EVENT_CHANGE]
+              changedEvents.forEach((eventType) => {
+                this.$emit(eventType, index)
+              })
+            }
 
       },
       _updateSliderStyle () {
+
         if (!this.showSlider) return
         const slider = this.$refs.slider
         this.$nextTick(() => {
