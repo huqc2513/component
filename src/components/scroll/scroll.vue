@@ -36,7 +36,7 @@
         </div>
         <div class="after-trigger" v-else>
           <div v-if="isPullingDown" class="loading">
-            <loading></loading>
+            <loading ></loading>
           </div>
           <div v-else><span>{{refreshTxt}}</span></div>
         </div>
@@ -335,8 +335,10 @@
     align-items center
     transition: all
     .after-trigger
-      margin-top: 10px
-
+        margin-top: 10px
+        display flex
+        justify-content center
+        margin auto
   .pullup-wrapper
     width: 100%
     display: flex

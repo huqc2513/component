@@ -1,33 +1,13 @@
 <template>
   <div class="cube-tab-bar" :class="{'cube-tab-bar_inline': inline}">
     <slot>
-      <cube-tab
-        v-for="(item,index) in data"
-        :label="item.label"
-        :icon="item.icon"
-        :key="index">
-      </cube-tab>
+     
     </slot>
-    <div v-if="showSlider" ref="slider" class="cube-tab-bar-slider"></div>
+    <div v-if="showSlider" ref="slider" class="cube-tab-bar-slider" :style="{backgroundColor:activeColor}"></div>
   </div>
 </template>
 <script type="text/ecmascript-6">
 
-
-    function findIndex(ary, fn) {
-    if (ary.findIndex) {
-        return ary.findIndex(fn)
-    }
-    let index = -1
-    ary.some(function (item, i, ary) {
-        const ret = fn.call(this, item, i, ary)
-        if (ret) {
-        index = i
-        return ret
-        }
-    })
-    return index
-    }
 
 
   import { prefixStyle } from '@/assets/js/dom'
@@ -47,7 +27,16 @@
     components: {
       CubeTab
     },
+
     props: {
+      color:{
+        type:String,
+        default:`#666`
+      },
+      activeColor:{
+        type:String,
+        default:'#FF9900'
+      },
       value: {
         type: [String, Number],
         required: true
@@ -73,10 +62,19 @@
     },
     created () {
       this.tabs = []
-      console.error(this.showSlider)
     },
     mounted () {
-      this._updateSliderStyle()
+
+        this.$nextTick(() => {
+            this._updateSliderStyle()
+            if (!this.showSlider) return
+              const slider = this.$refs.slider
+              const { width } = this._getSliderWidthAndIndex()
+              slider.style.width = `${width}px`
+
+              this.setSliderTransform(this._getOffsetLeft(this.index))
+        })
+
     },
     methods: {
       addTab (tab) {
@@ -86,24 +84,21 @@
         const index = this.tabs.indexOf(tab)
         if (index > -1) this.tabs.splice(index, 1)
       },
-      trigger (label) {
-        this.$emit(EVENT_CLICK, label)
-        if (label !== this.value) {
-          const changedEvents = [EVENT_INPUT, EVENT_CHANGE]
-          changedEvents.forEach((eventType) => {
-            this.$emit(eventType, label)
-          })
-        }
+      trigger (item) {
+         let index= this.data.indexOf(item)
+
+          if (item.label !== this.value) {
+              const changedEvents = [EVENT_INPUT, EVENT_CHANGE]
+              changedEvents.forEach((eventType) => {
+                this.$emit(eventType,index)
+              })
+            }
       },
       _updateSliderStyle () {
-
         if (!this.showSlider) return
         const slider = this.$refs.slider
         this.$nextTick(() => {
-            //拿到每个tab的宽度和下标
-          const { width, index } = this._getSliderWidthAndIndex()
-          slider.style.width = `${width}px`
-          this.setSliderTransform(this._getOffsetLeft(index))
+           this.setSliderTransform(this._getOffsetLeft(this.index))
         })
       },
       setSliderTransform (offset) {
@@ -120,10 +115,11 @@
       _getSliderWidthAndIndex () {
         let width = 0
         let index = 0
-        if (this.tabs.length > 0) {
-          index = findIndex(this.tabs, (tab) => tab.label === this.value)
-          width = this.tabs[index].$el.clientWidth
-        }
+          this.tabs.forEach((e,i)=>{
+              if(i<=this.index && e.$el){
+                       width=  e.$el.clientWidth
+                }
+          })
         return {
           width,
           index
@@ -133,7 +129,11 @@
       _getOffsetLeft (index) {
         let offsetLeft = 0
         this.tabs.forEach((tab, i) => {
-          if (i < index) offsetLeft += tab.$el.clientWidth
+          if (i < index){
+            if(tab.$el){
+            offsetLeft += tab.$el.clientWidth
+            }
+          } 
         })
         return offsetLeft
       }
@@ -142,7 +142,19 @@
       value () {
         this._updateSliderStyle()
       }
-    }
+    },
+   computed: {
+      index () {
+        let index=-1
+        this.data.forEach((e,i)=>{
+          if(e.label===this.value){
+            index=i
+              return
+          }
+        })
+         return  index
+      }
+    },
   }
 </script>
 <style lang="scss" >
@@ -165,8 +177,8 @@
     left: 0;
     bottom: 0;
     height: 2px;
-    width: 20px;
-    background-color:#2F5FEA;
+
+    // background-color:#2F5FEA;
   }
 
 

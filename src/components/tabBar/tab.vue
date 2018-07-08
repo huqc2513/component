@@ -1,24 +1,27 @@
 <template>
   <div
     class="cube-tab"
+    :style="isActive"
     :class="{'cube-tab_active': isActive}"
     @click="handleClick">
     <slot name="icon">
       <i :class="icon"></i>
     </slot>
     <slot>
-      <div v-html="label"></div>
+      <div >{{item.label}}</div>
     </slot>
   </div>
 </template>
 <script type="text/ecmascript-6">
-  const COMPONENT_NAME = 'cube-tab'
+  const COMPONENT_NAME = 'tab'
+
+
+
   export default {
     name: COMPONENT_NAME,
     props: {
-      label: {
-        type: [String, Number],
-        required: true
+      item: {
+        type: [Object],
       },
       icon: {
         type: String,
@@ -26,33 +29,36 @@
       }
     },
     mounted () {
+
       this.$parent.addTab(this)
+
     },
     destroyed () {
       this.$parent.removeTab(this)
     },
     computed: {
       isActive () {
-        return this.$parent.value === this.label
+
+         return {
+              color:this.$parent.value ===this.item.label ? this.$parent.activeColor :this.$parent.color
+         }  
       }
     },
     methods: {
-      handleClick (item) {
-        this.$parent.trigger(this.label)
+      handleClick () {
+        this.$parent.trigger(this.item)
       }
     }
   }
 </script>
-<style lang="scss" >
+<style lang="scss" scoped >
 
   .cube-tab{
          flex: 1;
         padding: 7px 0;
-        color: black;
+   
         text-align: center;
   }
-  .cube-tab_active{
-    color: #2F5FEA;
-  }
+
 
 </style>
