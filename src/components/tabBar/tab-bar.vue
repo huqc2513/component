@@ -9,8 +9,6 @@
 <script type="text/ecmascript-6">
 
 
-   
-
 
   import { prefixStyle } from '@/assets/js/dom'
 
@@ -64,10 +62,19 @@
     },
     created () {
       this.tabs = []
-   
     },
     mounted () {
-      this._updateSliderStyle()
+
+        this.$nextTick(() => {
+            this._updateSliderStyle()
+            if (!this.showSlider) return
+              const slider = this.$refs.slider
+              const { width } = this._getSliderWidthAndIndex()
+              slider.style.width = `${width}px`
+
+              this.setSliderTransform(this._getOffsetLeft(this.index))
+        })
+
     },
     methods: {
       addTab (tab) {
@@ -77,25 +84,21 @@
         const index = this.tabs.indexOf(tab)
         if (index > -1) this.tabs.splice(index, 1)
       },
-      trigger (label) {
-         let index=this.data.indexOf(label)
-          if (index !== this.value) {
+      trigger (item) {
+         let index= this.data.indexOf(item)
+
+          if (item.label !== this.value) {
               const changedEvents = [EVENT_INPUT, EVENT_CHANGE]
               changedEvents.forEach((eventType) => {
-                this.$emit(eventType, index)
+                this.$emit(eventType,index)
               })
             }
-
       },
       _updateSliderStyle () {
-
         if (!this.showSlider) return
         const slider = this.$refs.slider
         this.$nextTick(() => {
-    
-          const { width } = this._getSliderWidthAndIndex()
-          slider.style.width = `${width}px`
-           this.setSliderTransform(this._getOffsetLeft(this.value))
+           this.setSliderTransform(this._getOffsetLeft(this.index))
         })
       },
       setSliderTransform (offset) {
@@ -113,7 +116,7 @@
         let width = 0
         let index = 0
           this.tabs.forEach((e,i)=>{
-              if(i<=this.value && e.$el){
+              if(i<=this.index && e.$el){
                        width=  e.$el.clientWidth
                 }
           })
@@ -139,7 +142,19 @@
       value () {
         this._updateSliderStyle()
       }
-    }
+    },
+   computed: {
+      index () {
+        let index=-1
+        this.data.forEach((e,i)=>{
+          if(e.label===this.value){
+            index=i
+              return
+          }
+        })
+         return  index
+      }
+    },
   }
 </script>
 <style lang="scss" >
@@ -162,7 +177,7 @@
     left: 0;
     bottom: 0;
     height: 2px;
-    width: 20px;
+
     // background-color:#2F5FEA;
   }
 

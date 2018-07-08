@@ -117,11 +117,9 @@
 
       needRefreshProps.forEach((key) => {
         this.$watch(key, () => {
-          // To fix the render bug when add items since loop.
           if (key === 'data') {
             this._destroy()
           }
-          /* istanbul ignore next */
           this.$nextTick(() => {
             this.refresh()
           })
@@ -138,21 +136,17 @@
     },
     methods: {
       clickItem(item, index) {
-        /* istanbul ignore next */
         this.$emit(EVENT_SELECT, item, index)
       },
       refresh() {
-        /* istanbul ignore if */
         if (this.slide === null) {
           return
         }
-
         this._destroy()
         clearTimeout(this._timer)
         if (this.slide) {
           this.currentPageIndex = 0
         }
-   
         //设置宽度
         this._updateSlideDom()
         if (this.showDots) {
@@ -161,7 +155,6 @@
         if (this.currentPageIndex >= this.dots.length) {
           this.currentPageIndex = this.dots.length - 1
         }
-
         //初始化 bs
         this._initSlide()
         if (this.autoPlay) {
@@ -259,7 +252,7 @@
         if (this.currentPageIndex !== pageIndex) {
      
           this.currentPageIndex = pageIndex
-          console.warn('emit:'+pageIndex)
+          // console.warn('emit:'+pageIndex)
 
           this.$emit(EVENT_CHANGE, pageIndex)
         }
