@@ -48,9 +48,6 @@
         const curIndex = findIndex(this.panels, panel => panel.label === value)
         const panelsGroup = this.$refs.panelsGroup
         const distance = -(curIndex * 100)
-
-        console.warn(value)
-
         panelsGroup.style[TRANSFORM] = `translateX(${distance}%)`
 
 

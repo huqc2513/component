@@ -27,8 +27,11 @@
     components: {
       CubeTab
     },
-
     props: {
+      animation:{
+        type:Boolean,
+        default:false
+      },
       color:{
         type:String,
         default:`#666`
@@ -58,25 +61,53 @@
       useTransition: {
         type: Boolean,
         default: true
-      }
+      },
+     
     },
     created () {
       this.tabs = []
     },
     mounted () {
-
         this.$nextTick(() => {
-            this._updateSliderStyle()
-            if (!this.showSlider) return
-              const slider = this.$refs.slider
-              const { width } = this._getSliderWidthAndIndex()
-              slider.style.width = `${width}px`
+          if (!this.showSlider) return
 
-              this.setSliderTransform(this._getOffsetLeft(this.index))
+            // if(this.animation){
+            // _updateSliderStyle
+            // //  this.setSliderTransform()
+            //         //  const slider = this.$refs.slider
+            //         // let { width } = this._getSliderWidthAndIndex();
+            //         // this.setSliderTransform( (width- width*0.6)/2  )
+            // }else{
+               this._updateSliderStyle()
+            // }
+            this.setSlideWidth()
         })
-
     },
     methods: {
+      setSlideWidth(){
+             const slider = this.$refs.slider
+              let { width } = this._getSliderWidthAndIndex();
+                if(this.animation){
+                  width =width * 0.6
+                }
+              console.error(this.animation)
+
+              slider.style.width = `${width}px`
+      },
+
+      SelectAnimation(){
+
+              const slider = this.$refs.slider
+              let { width } = this._getSliderWidthAndIndex()
+              // let transformWidth =width
+              // if(this.animation==='creeping'){
+              //    width = width*0.6
+              // }
+              // slider.style.width = `${width}px`
+              
+              // this.setSliderTransform ( ( transformWidth - width)/2)
+
+      },
       addTab (tab) {
         this.tabs.push(tab)
       },
@@ -86,7 +117,6 @@
       },
       trigger (item) {
          let index= this.data.indexOf(item)
-
           if (item.label !== this.value) {
               const changedEvents = [EVENT_INPUT, EVENT_CHANGE]
               changedEvents.forEach((eventType) => {
@@ -94,12 +124,33 @@
               })
             }
       },
+      //动态设置宽度
+      _updateSliderWidth(offset){
+        const slider = this.$refs.slider
+        if (typeof offset === 'number') {
+          offset = `${offset}px`
+        }
+        if (slider) {
+          if (this.useTransition) slider.style[TRANSITION] = `all 0.2s linear`
+          
+          let width = slider.style.width
+          // slider.style.width=  width+offset +'px'
+          // slider.style[TRANSFORM] = `translateX(${offset/10}) translateZ(0)`
+        }
+      },
       _updateSliderStyle () {
         if (!this.showSlider) return
         const slider = this.$refs.slider
         this.$nextTick(() => {
+       
            this.setSliderTransform(this._getOffsetLeft(this.index))
         })
+      },
+      setSliderWidth(percent){
+                  const slider = this.$refs.slider
+                  let width  =  this.tabs[0].$el.clientWidth *0.6
+                  let w =(parseInt(width) + parseInt(width)*percent)
+                  slider.style.width =  w+'px'
       },
       setSliderTransform (offset) {
         const slider = this.$refs.slider
@@ -135,6 +186,10 @@
             }
           } 
         })
+           if(this.animation){
+         offsetLeft =    offsetLeft +   (this.tabs[0].$el.clientWidth - this.tabs[0].$el.clientWidth *0.6)/2
+             
+           }
         return offsetLeft
       }
     },

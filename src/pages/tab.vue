@@ -1,9 +1,9 @@
     <template>
-        <div>
+        <div class='main'>
           <div style='height:80px'>
-          <div style='margin:10px 0'>
-            <b>tab联动</b>  
-          </div>
+              <p>
+                带滚动的tab
+              </p>
                 <div class='tabbar'>
                     <tabBar  v-model="value1" ref='tabNav' :data='list' :showSlider='true' > 
                             <tab
@@ -15,6 +15,7 @@
                     </tabBar> 
             </div> 
          </div>
+
 
                 <div class="tab-slide-container" >
                         <slide
@@ -29,7 +30,9 @@
                         >
 
                                 <slide-item>
-                                    <cube-scroll 
+                                  <div class='item' style="height:400px;">1</div>  
+                                </slide-item>
+                                    <!-- <cube-scroll 
                                       :list="list1" 
                                       ref="scroll" 
                                       :pullUpLoad="pullUpLoad" 
@@ -40,27 +43,70 @@
                                                 <ul class="list-content">
                                                         <li class="list-item" v-for="(i,index) in list1" :key="index" >{{i}}</li>
                                                  </ul>
-                                    </cube-scroll>
-                                </slide-item>
-
-
+                                    </cube-scroll> -->
+                                <!-- </slide-item> -->
                                 <slide-item>
-                                    <!-- <cube-scroll :data="recommendData"> -->
                                   <div class='item' style="height:400px;">2</div>  
-                                    <!-- </cube-scroll> -->
                                 </slide-item>
-
-
                                 <slide-item>
-                                    <!-- <cube-scroll :data="hotData"> -->
                                       <div class='item' style="height:400px;">3</div>   
-                                    <!-- </cube-scroll> -->
                                 </slide-item>
 
                         </slide>
                </div>
 
+        <div>
+        <p>滑动动画效果</p>
+                <div class='tabbar'>
+                    <tabBar  v-model="value1" ref='tabNav' :animation='true' :data='list' :showSlider='true' > 
+                            <tab
+                            v-for="(item,index) in list"
+                            :item="item"
+                            :icon="item.icon"
+                            :key="index">
+                        </tab>
+                    </tabBar> 
 
+                       <slide
+                            ref="slide"
+                            :loop="false"
+                            :initial-index="value1"
+                            :auto-play="false"
+                            :show-dots="true"
+                            :options="options"
+                            @scroll="scroll"
+                            @change="changePage"
+                            :animation='true'
+                        >
+
+                                <slide-item>
+                                  <div class='item' style="height:400px;">1</div>  
+                                </slide-item>
+                                    <!-- <cube-scroll 
+                                      :list="list1" 
+                                      ref="scroll" 
+                                      :pullUpLoad="pullUpLoad" 
+                                      :pullDownRefresh="pullDownRefresh"
+                                       @pullingDown="pullingDown" 
+                                       @pullingUp="pullingUp"
+                                      >
+                                                <ul class="list-content">
+                                                        <li class="list-item" v-for="(i,index) in list1" :key="index" >{{i}}</li>
+                                                 </ul>
+                                    </cube-scroll> -->
+                                <!-- </slide-item> -->
+                                <slide-item>
+                                  <div class='item' style="height:400px;">2</div>  
+                                </slide-item>
+                                <slide-item>
+                                      <div class='item' style="height:400px;">3</div>   
+                                </slide-item>
+
+                        </slide>
+
+            </div> 
+
+        </div>
 
         </div> 
     </template>
@@ -84,6 +130,7 @@ import {
   input as inputeItem,
   verificationCode
 } from "@/components/form/index";
+
 import slideItemVue from '../components/slide/slide-item.vue';
 
 
@@ -188,9 +235,26 @@ export default {
         const tabItemWidth = this.$refs.tabNav.$el.clientWidth
         //slide 宽度
         const slideScrollerWidth = this.$refs.slide.slide.scrollerWidth
+
         //计算百分比
-        const deltaX = x / slideScrollerWidth * tabItemWidth
-        this.$refs.tabNav.setSliderTransform(deltaX)
+        // x>=tabItemWidth/3
+   
+        let per=  x / slideScrollerWidth %3
+            per= per.toFixed(2) % 0.33
+
+
+        // per =  per* (slideScrollerWidth/3)
+       
+         const deltaX = x / slideScrollerWidth * tabItemWidth
+        // const percentage = x/ (tabItemWidth/3) /  (slideScrollerWidth / 3 ) 
+
+        // this.$refs.tabNav.setSliderTransform(deltaX)
+        this.$refs.tabNav.setSliderWidth(per)
+
+        
+      //  console.error(deltaX)
+        // this.$refs.tabNav._updateSliderWidth(deltaX)
+
       },
       getCode() {
         toast("验证码已发送，请查收短信");
@@ -208,9 +272,15 @@ export default {
 </script>
  <style  lang='stylus'  >
 
+ .main{
+   width:100%;
+   height:100%;
+   overflow:scroll;
+ }
+
 .tab-slide-container{
-  position absolute
-  height calc( 100% - 80px)  
+  // position absolute
+  // height calc( 100% - 80px)  
   width 100%
   border 1px solid #ededed
   overflow hidden
@@ -230,7 +300,7 @@ export default {
   /*overflow-y: hidden;*/
 }
 .tab_item {
-  display: inline-block;
+
   width: 375px;
   height: 100px;
   border: 1px solid black;
@@ -241,9 +311,7 @@ export default {
 .tabpanels{
     border: 1px solid black;
 }
-
 .item{
-    border 1px solid black;
     height 100px
 }
 

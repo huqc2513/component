@@ -53,7 +53,6 @@
       data: {
         type: Array,
         default() {
-          /* istanbul ignore next */
           return []
         }
       },
@@ -89,7 +88,6 @@
         type: String,
         default: DIRECTION_H
       },
-      // The props allowVertical, stopPropagation could be removed in next minor version.
       allowVertical: {
         type: Boolean,
         default: undefined,
@@ -222,9 +220,7 @@
         this.slide.goToPage(this.currentPageIndex, 0, 0)
       
       this.slide.on('scrollEnd', this._onScrollEnd)
-        /* dispatch scroll position */
         if (this.options.listenScroll) {
-          //  ensure dispatch scroll position constantly
           this.options.probeType = 3
           this.slide.on('scroll', this._onScroll)
         }

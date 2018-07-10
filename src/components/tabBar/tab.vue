@@ -26,19 +26,20 @@
       icon: {
         type: String,
         default: ''
+      },
+      width:{
+        type:[String],
+        default:`150px`
       }
     },
     mounted () {
-
       this.$parent.addTab(this)
-
     },
     destroyed () {
       this.$parent.removeTab(this)
     },
     computed: {
       isActive () {
-
          return {
               color:this.$parent.value ===this.item.label ? this.$parent.activeColor :this.$parent.color
          }  
