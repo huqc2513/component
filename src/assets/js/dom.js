@@ -103,13 +103,14 @@ export function getMatchedTarget(e, targetClassName) {
 
 
 
-export function findIndex(ary, fn) {
+ export function findIndex(ary, fn) {
+   //如果有findIndex  返回fn的return 给findindex
   if (ary.findIndex) {
       return ary.findIndex(fn)
   }
   let index = -1
-  ary.some(function (item, index, ary) {
-      const ret = fn.call(this, item, index, ary)
+  ary.some(function (item, i, ary) {
+      const ret = fn.call(this, item, i, ary)
       if (ret) {
       index = i
       return ret

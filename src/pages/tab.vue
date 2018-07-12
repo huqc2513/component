@@ -236,20 +236,21 @@ export default {
         //slide 宽度
         const slideScrollerWidth = this.$refs.slide.slide.scrollerWidth
 
-        //计算百分比
-        // x>=tabItemWidth/3
-   
-        let per=  x / slideScrollerWidth %3
-            per= per.toFixed(2) % 0.33
+    
+        //滚动距离的百分比取余 
+        let per=  (x / slideScrollerWidth) %this.list.length
+        per= per.toFixed(2)  * tabItemWidth
+        // %  (100 /this.list.length)
+        if(per>0){
+         this.$refs.tabNav.setSliderWidth(per)
+        }
 
-
-        // per =  per* (slideScrollerWidth/3)
+       
        
          const deltaX = x / slideScrollerWidth * tabItemWidth
         // const percentage = x/ (tabItemWidth/3) /  (slideScrollerWidth / 3 ) 
 
         // this.$refs.tabNav.setSliderTransform(deltaX)
-        this.$refs.tabNav.setSliderWidth(per)
 
         
       //  console.error(deltaX)

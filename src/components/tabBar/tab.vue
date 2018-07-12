@@ -27,10 +27,10 @@
         type: String,
         default: ''
       },
-      width:{
-        type:[String],
-        default:`150px`
-      }
+    //  width:{
+        // type:[String],
+        // default:`100px`
+      // }
     },
     mounted () {
       this.$parent.addTab(this)
@@ -40,8 +40,13 @@
     },
     computed: {
       isActive () {
-         return {
-              color:this.$parent.value ===this.item.label ? this.$parent.activeColor :this.$parent.color
+      
+        
+        // let width=this.width
+
+        return {
+              color: this.$parent.value ===this.item.label ? this.$parent.activeColor :this.$parent.color,
+              
          }  
       }
     },

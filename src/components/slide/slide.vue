@@ -248,7 +248,6 @@
         if (this.currentPageIndex !== pageIndex) {
      
           this.currentPageIndex = pageIndex
-          // console.warn('emit:'+pageIndex)
 
           this.$emit(EVENT_CHANGE, pageIndex)
         }

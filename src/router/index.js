@@ -40,6 +40,13 @@ export default  new Router({
       meta: {
         title: "登录 "
       }
+    },
+    {
+      path: '/popup',
+      component : resolve => require(['../pages/popup.vue'], resolve),
+      meta: {
+        title: " "
+      }
     }
   ]
 })

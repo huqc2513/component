@@ -71,26 +71,19 @@
         this.$nextTick(() => {
           if (!this.showSlider) return
 
-            // if(this.animation){
-            // _updateSliderStyle
-            // //  this.setSliderTransform()
-            //         //  const slider = this.$refs.slider
-            //         // let { width } = this._getSliderWidthAndIndex();
-            //         // this.setSliderTransform( (width- width*0.6)/2  )
-            // }else{
-               this._updateSliderStyle()
-            // }
+         
+            this._updateSliderStyle()
             this.setSlideWidth()
         })
     },
     methods: {
-      setSlideWidth(){
+      setSlideWidth(index){
              const slider = this.$refs.slider
               let { width } = this._getSliderWidthAndIndex();
-                if(this.animation){
+              
+             if(this.animation){
                   width =width * 0.6
                 }
-              console.error(this.animation)
 
               slider.style.width = `${width}px`
       },
@@ -142,15 +135,17 @@
         if (!this.showSlider) return
         const slider = this.$refs.slider
         this.$nextTick(() => {
-       
            this.setSliderTransform(this._getOffsetLeft(this.index))
         })
       },
       setSliderWidth(percent){
                   const slider = this.$refs.slider
                   let width  =  this.tabs[0].$el.clientWidth *0.6
-                  let w =(parseInt(width) + parseInt(width)*percent)
-                  slider.style.width =  w+'px'
+                  let w =(parseInt(width) + percent)
+                if(w> this.tabs[0].$el.clientWidth){
+                  w= this.tabs[0].$el.clientWidth
+                }
+                slider.style.width =  w+'px'
       },
       setSliderTransform (offset) {
         const slider = this.$refs.slider
@@ -191,11 +186,19 @@
              
            }
         return offsetLeft
+      },
+      shrinkWidt(){
+
       }
     },
     watch: {
       value () {
+        if(this.animation){
+            this.setSlideWidth()
+             this._updateSliderStyle()
+        }else{
         this._updateSliderStyle()
+        }
       }
     },
    computed: {
