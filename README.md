@@ -8,7 +8,6 @@
 支持上下拉刷新<br>
 效果在线预览:http://112.74.173.191/component/index.html#/test<br><br>
 
-代码分析地址:https://www.jianshu.com/p/9baf9e3aff96<br>
 
 
 ## tab 滑动组件
@@ -25,3 +24,9 @@
 ##vux中的tab组件点击类似小虫爬动效果实现分析
 
 http://note.youdao.com/noteshare?id=6da9574b58b30faa5cc2514167a0bf85
+
+
+
+##cube-ui中的scroll组件上下拉刷新
+代码分析地址:https://www.jianshu.com/p/9baf9e3aff96<br>
+
