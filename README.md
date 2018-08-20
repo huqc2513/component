@@ -20,7 +20,8 @@
  跑马灯、验证码倒计时、tab、checkbox、input、button
 
 
-## 组件开发学习
+## ui中常用的组件实现分析
 
-##vux中的tab组件实现分析
+##vux中的tab组件点击类似小虫爬动效果实现分析
+
 http://note.youdao.com/noteshare?id=6da9574b58b30faa5cc2514167a0bf85
