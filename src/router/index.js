@@ -4,6 +4,9 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
+
+
+
 export default  new Router({
   routes: [
     {
@@ -35,6 +38,13 @@ export default  new Router({
       }
     },
     {
+      path: '/picker',
+      component : resolve => require(['../pages/picker'], resolve),
+      meta: {
+        title: "picker"
+      }
+    },
+    {
       path: '/login',
       component : resolve => require(['../pages/login/login.vue'], resolve),
       meta: {
@@ -47,7 +57,15 @@ export default  new Router({
       meta: {
         title: " "
       }
+    },
+    {
+      path: '/calendar',
+      component : resolve => require(['../pages/calendar.vue'], resolve),
+      meta: {
+        title: "日历"
+      }
     }
+
   ]
 })
 

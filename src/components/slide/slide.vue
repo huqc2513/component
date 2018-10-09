@@ -258,6 +258,7 @@
         }
       },
       _onScroll(pos) {
+        
         this.$emit(EVENT_SCROLL, pos)
       },
       _initDots() {

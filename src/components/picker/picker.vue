@@ -49,10 +49,18 @@
 
   import BScroll from 'better-scroll'
   import CubePopup from '../popup/popup.vue'
+
   import visibilityMixin from '../../common/mixins/visibility'
   import popupMixin from '../../common/mixins/popup'
+
   import basicPickerMixin from '../../common/mixins/basic-picker'
   import pickerMixin from '../../common/mixins/picker'
+
+
+
+
+
+
   const COMPONENT_NAME = 'cube-picker'
   const EVENT_SELECT = 'select'
   const EVENT_VALUE_CHANGE = 'value-change'

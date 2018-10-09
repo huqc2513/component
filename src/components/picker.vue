@@ -1,9 +1,7 @@
 <template>
   <transition name="picker-fade">
     <div class="picker" v-show="state===1" @touchmove.prevent @click="cancel">
-     
       <transition name="picker-move">
-
         <div class="picker-panel" v-show="state===1" @click.stop>
           <div class="picker-choose border-bottom-1px">
             <span class="cancel" @click="cancel">{{cancelTxt}}</span>
@@ -14,27 +12,25 @@
             <div class="mask-top border-bottom-1px"></div>
             <div class="mask-bottom border-top-1px"></div>
             <div class="wheel-wrapper" ref="wheelWrapper">
-              <div class="wheel" v-for="(data,index) in pickerData" :key=index>
-
+              <div class="wheel" v-for="(data,index) in pickerData" :key='index'>
                 <ul class="wheel-scroll">
                   <li v-for="(item,index) in data" class="wheel-item" :key='index'>{{item.text}}</li>
                 </ul>
-
               </div>
             </div>
           </div>
           <div class="picker-footer"></div>
         </div>
-
       </transition>
-
     </div>
   </transition>
 </template>
 
 <script type="text/ecmascript-6">
 
+
   import BScroll from 'better-scroll'
+
 
   const STATE_HIDE = 0
   const STATE_SHOW = 1
@@ -47,7 +43,7 @@
     name: COMPONENT_NAME,
     props: {
       data: {
-        type: [Array,Object],
+        type: Array,
         default() {
           return []
         }
@@ -80,18 +76,10 @@
         pickerData: this.data.slice(),
         pickerSelectedIndex: this.selectedIndex,
         pickerSelectedVal: [],
-        pickerSelectedText: [],
-        selectedProvince: 0,
-        selectedCity: 0,
-        province: this.setProvince(),
+        pickerSelectedText: []
       }
     },
     created() {
-    
-    
-     this.datas = [this.province, this.city, this.district]
-     console.warn('2'+this.pickerData)
-
       if (!this.pickerSelectedIndex.length) {
         this.pickerSelectedIndex = []
         for (let i = 0; i < this.pickerData.length; i++) {
@@ -99,47 +87,7 @@
         }
       }
     },
-    computed:{
-      city() {
-        let list = []
-            console.warn('po'+this.selectedProvince)
-        if (this.selectedProvince) {
-          Object.keys(addressData[this.selectedProvince]).forEach((i) => {
-            list.push({
-              text: addressData[this.selectedProvince][i],
-              value: i
-            })
-          })
-        }
-    
-        return list
-      },
-     district() {
-        let list = [];
-        if (this.selectedCity) {
-          Object.keys(addressData[this.selectedCity]).forEach((i) => {
-            list.push({
-              text: addressData[this.selectedCity][i],
-              value: i
-            });
-          });
-        }
-        return list;
-      }
-    },
     methods: {
-     setProvince() {
-        let list = [];
-        Object.keys(addressData['86']).forEach((i) => {
-          addressData['86'][i].forEach((f) => {
-            list.push({
-              text: f.address,
-              value: f.code
-            })
-          })
-        });
-        return list;
-      },
       confirm() {
         if (!this._canConfirm()) {
           return
@@ -279,9 +227,6 @@
         })
       }
     },
-    mounted(){
-        this._createWheel()
-    },
     watch: {
       data(newData) {
         this.setData(newData)
@@ -290,10 +235,14 @@
   }
 </script>
 
-<style scoped lang="stylus" rel="stylesheet/stylus">
+<style scoped lang="stylus" >
 
-  @import "../common/stylus/mixin.styl"
-  @import "../common/stylus/variable.styl"
+
+    @import "../common/stylus/mixin.styl"
+
+     @import "../common/stylus/variable.styl"
+
+    
 
   .picker
     position: fixed

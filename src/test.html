@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src='./util.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+<style>
+
+    *{
+       box-sizing: border-box;
+       padding: 0;
+       margin: 0;     
+    }
+    .calendar-wrapper{
+        margin: auto;
+        text-align: center;
+        border: 1px solid #ededed;
+    }
+    .list-row{
+        height: 50px;
+        margin: auto;
+        text-align: left;
+    }
+    .list-item{
+        display: inline-block;
+        list-style: none;
+        text-align: center;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 12px;
+        border: 1px solid #ededed;
+    }
+</style>
+
+<body>
+
+
+
+
+    <div id="app">
+          <div class='calendar-wrapper' v-if="days">
+                <ul  class='list-row' v-for="(rowData ,index) in days" :key="index">
+                    <li class='list-item' v-for="(item ,i) in rowData" :key="i" >
+                                {{item.nub}}
+                    </li>
+                </ul>
+          </div>
+    </div>
+
+
+    <script>
+
+
+        // let days = getDays(2018,8)
+
+        function getDayList(year, month, isEmpty = false) {
+
+            var fristDay = new Date(year, month - 1, 1).getDay();                  //单月第一天
+            var lastDayOflastMonth = new Date(year, month - 1, 0).getDate();       //上月最后一天
+            var lastDayOfCurrentMonth = new Date(year, month, 0).getDate();          //单月最后一天
+
+            var fristDayOflastMonth = new Date(year, month+1,1).getDate();          //下月第一天
+
+           alert(fristDayOflastMonth )     
+
+
+            let tmp = [], difference = 0;
+
+            if (fristDay > 0) {
+                difference = Math.abs(0 - fristDay)
+                let i = 1
+                while (i <= difference) {
+                    var time = new Date(year, month - 2, i === 1 ? lastDayOflastMonth : lastDayOflastMonth - i)
+
+                    tmp.push({
+                        timeStr: format(time, 'YYYY-MM-DD'),
+                        time,
+                        nub: i === 1 ? lastDayOflastMonth : lastDayOflastMonth - i,
+                        isEmpty: isEmpty
+                    })
+                    i++
+                }
+            }
+
+
+            for (let i = 0; i <= lastDayOfCurrentMonth; i++) {
+                var time = new Date(year, month - 1, i)
+                tmp.push({
+                    timeStr: format(time, 'YYYY-MM-DD'),
+                    time,
+                    nub: i === 1 ? lastDayOflastMonth : lastDayOflastMonth - i,
+                })
+            }
+
+
+
+            return tmp
+        }
+
+
+        
+
+
+
+
+            var app = new Vue({
+                el: '#app',
+                data(){
+                    return {
+                        days:[]
+                    }
+                },
+                created(){
+                    this.getDays()
+                },
+                methods:{
+                    getDays(){
+                      let days =  getDayList(2018,9, false)
+                      this.days =   this.chuck(days,7)
+                    },
+                    chuck(list,nub=7){
+
+                        let result=[]
+
+                        for(let i=0;i<list.length;i+=nub){
+                            result.push(list.slice(i,i+nub));
+                        }
+                        return result
+
+                    }
+                },
+            })
+
+
+    </script>
+</body>
+
+
+</html>

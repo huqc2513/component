@@ -40,13 +40,8 @@
     },
     computed: {
       isActive () {
-      
-        
-        // let width=this.width
-
         return {
               color: this.$parent.value ===this.item.label ? this.$parent.activeColor :this.$parent.color,
-              
          }  
       }
     },
