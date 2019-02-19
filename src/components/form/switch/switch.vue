@@ -8,9 +8,9 @@
       :disabled="disabled"
     >
     <i class="cube-switch-ui"></i>
-    <span class="cube-switch-label">
+    <!-- <span class="cube-switch-label">
       <slot>123</slot>
-    </span>
+    </span> -->
   </div>
 </template>
 
@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-@require '../../common/stylus/variable.styl';
+@require '../../../common/stylus/variable.styl';
 
 $switch-width = 48px;
 $switch-height = 28px;

@@ -9,7 +9,7 @@
     >
     <i class="cube-switch-ui"></i>
     <span class="cube-switch-label">
-      <slot>123</slot>
+      <slot></slot>
     </span>
   </div>
 </template>

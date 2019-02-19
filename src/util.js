@@ -1,40 +1,39 @@
 
-
- function format (date, fmt = 'YYYY-MM-DD HH:mm:ss') {
-    var o = {
-      'M+': date.getMonth() + 1,
-      'D+': date.getDate(),
-      'h+': date.getHours() % 12 === 0 ? 12 : date.getHours() % 12,
-      'H+': date.getHours(),
-      'm+': date.getMinutes(),
-      's+': date.getSeconds(),
-      'q+': Math.floor((date.getMonth() + 3) / 3),
-      'S': date.getMilliseconds()
+function format (date, fmt = 'YYYY-MM-DD HH:mm:ss') {
+  var o = {
+    'M+': date.getMonth() + 1,
+    'D+': date.getDate(),
+    'h+': date.getHours() % 12 === 0 ? 12 : date.getHours() % 12,
+    'H+': date.getHours(),
+    'm+': date.getMinutes(),
+    's+': date.getSeconds(),
+    'q+': Math.floor((date.getMonth() + 3) / 3),
+    'S': date.getMilliseconds()
+  }
+  var week = {
+    '0': '\u65e5',
+    '1': '\u4e00',
+    '2': '\u4e8c',
+    '3': '\u4e09',
+    '4': '\u56db',
+    '5': '\u4e94',
+    '6': '\u516d'
+  }
+  if (/(Y+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
+  }
+  if (/(E+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? '\u661f\u671f' : '\u5468') : '') + week[date.getDay() + ''])
+  }
+  for (var k in o) {
+    if (new RegExp('(' + k + ')').test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
     }
-    var week = {
-      '0': '\u65e5',
-      '1': '\u4e00',
-      '2': '\u4e8c',
-      '3': '\u4e09',
-      '4': '\u56db',
-      '5': '\u4e94',
-      '6': '\u516d'
-    }
-    if (/(Y+)/.test(fmt)) {
-      fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
-    }
-    if (/(E+)/.test(fmt)) {
-      fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? '\u661f\u671f' : '\u5468') : '') + week[date.getDay() + ''])
-    }
-    for (var k in o) {
-      if (new RegExp('(' + k + ')').test(fmt)) {
-        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
-      }
-    }
-    return fmt
+  }
+  return fmt
 }
 
- function zero (n) {
+function zero (n) {
   return n < 10 ? '0' + n : n
 }
 
@@ -47,7 +46,7 @@ function splitValue (value) {
   }
 }
 
- function getPrevTime (year, month) {
+function getPrevTime (year, month) {
   if (month === 0) {
     return {
       month: 11,
@@ -61,8 +60,7 @@ function splitValue (value) {
   }
 }
 
-
- function getNextTime (year, month) {
+function getNextTime (year, month) {
   if (month === 11) {
     return {
       month: 0,
@@ -83,7 +81,7 @@ function getTime (str) {
   return typeof str === 'string' ? new Date(str.replace(/-/g, '/')).getTime() : str.getTime()
 }
 
- function isBetween (value, disablePast, disableFuture, rangeBegin, rangeEnd) {
+function isBetween (value, disablePast, disableFuture, rangeBegin, rangeEnd) {
   const { start, end } = getRange(disablePast, disableFuture, rangeBegin, rangeEnd)
   value = getTime(value)
   let isGte = start ? value >= getTime(start) : true
@@ -116,8 +114,7 @@ function getRange (disablePast = false, disableFuture = false, rangeBegin, range
   }
 }
 
-function getDays ({year, month, value, rangeBegin, rangeEnd, returnSixRows = true}) {
-    
+function getDays ({ year, month, value, rangeBegin, rangeEnd, returnSixRows = true }) {
   let today = format(new Date(), 'YYYY-MM-DD')
 
   let _splitValue = splitValue(value || today)
@@ -128,39 +125,37 @@ function getDays ({year, month, value, rangeBegin, rangeEnd, returnSixRows = tru
     month = _splitValue.month
   }
 
-  var firstDayOfMonth = new Date(year, month, 1).getDay()   // 单月第一天是周几   
-  var lastDateOfMonth = new Date(year, month + 1, 0).getDate()  //下月最后一天是几号
-  var lastDayOfLastMonth = new Date(year, month, 0).getDate()   //当月最后一天是几号
+  var firstDayOfMonth = new Date(year, month, 1).getDay() // 单月第一天是周几
+  var lastDateOfMonth = new Date(year, month + 1, 0).getDate() // 下月最后一天是几号
+  var lastDayOfLastMonth = new Date(year, month, 0).getDate() // 当月最后一天是几号
 
   var i
   var line = 0
   var temp = []
 
-  //下月第一天
+  // 下月第一天
   for (i = 1; i <= lastDateOfMonth; i++) {
-    var dow = new Date(year, month, i).getDay() 
-    
-      // 第一行
+    var dow = new Date(year, month, i).getDay()
+
+    // 第一行
     if (dow === 0) {
       temp[line] = []
     } else if (i === 1) {
       temp[line] = []
 
       var k = lastDayOfLastMonth - firstDayOfMonth + 1
-            for (let j = 0; j < firstDayOfMonth; j++) {
-                let rs = getPrevTime(year, month)
-                temp[line].push({
-                year: rs.year,
-                month: rs.month,
-                month_str: rs.month + 1,
-                day: k,
-                isLastMonth: true
-                })
-                k++
-            }
+      for (let j = 0; j < firstDayOfMonth; j++) {
+        let rs = getPrevTime(year, month)
+        temp[line].push({
+          year: rs.year,
+          month: rs.month,
+          month_str: rs.month + 1,
+          day: k,
+          isLastMonth: true
+        })
+        k++
+      }
     }
-
-
 
     let _format = format(new Date(year + '/' + (month + 1) + '/' + i), 'YYYY/MM/DD')
     let options = {
@@ -190,16 +185,7 @@ function getDays ({year, month, value, rangeBegin, rangeEnd, returnSixRows = tru
         k++
       }
     }
-
-
   }
-  
-  
-
-  console.error(temp)
-
-
-
 
   if (returnSixRows && temp.length === 5) {
     let rs = getNextTime(year, month)
@@ -262,12 +248,4 @@ function getDays ({year, month, value, rangeBegin, rangeEnd, returnSixRows = tru
       return line
     })
   }
-
-
 }
-
-
-
-
-
- 

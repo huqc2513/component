@@ -24,7 +24,7 @@
 
   import {
     button as ButtonItem,
-    checkbox as checkboxItem,
+    Checkbox as checkboxItem,
     input as inputeItem,
     verificationCode
   } from "@/components/form/index";

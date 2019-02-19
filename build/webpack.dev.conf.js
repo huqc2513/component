@@ -1,3 +1,5 @@
+
+/* eslint-disable */
 'use strict'
 const utils = require('./utils')
 const webpack = require('webpack')
@@ -31,7 +33,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     hot: true,
     contentBase: false, // since we use CopyWebpackPlugin.
     compress: true,
-    host: HOST || config.dev.host,
+    host: "localhost",
     port: PORT || config.dev.port,
     open: config.dev.autoOpenBrowser,
     overlay: config.dev.errorOverlay

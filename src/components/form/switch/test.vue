@@ -1,15 +1,14 @@
-.vue
 <template>
-  <div class="cube-switch">
+  <div class="i-switch">
     <input
-      class="cube-switch-input"
+      class="i-input"
       type="checkbox"
       v-model="checkboxValue"
       :disabled="disabled"
     >
-    <i class="cube-switch-ui"></i>
-    <span class="cube-switch-label">
-      <slot>123</slot>
+    <i class="i-switch-ui"></i>
+    <span class="i-switch-label">
+      <slot></slot>
     </span>
   </div>
 </template>
@@ -17,6 +16,7 @@
 <script type="text/ecmascript-6">
 const COMPONENT_NAME = "cube-switch";
 const EVENT_INPUT = "input";
+
 export default {
   name: COMPONENT_NAME,
   props: {
@@ -46,42 +46,40 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-@require '../../common/stylus/variable.styl';
-
 $switch-width = 48px;
-$switch-height = 28px;
+$switch-height = 24px;
+$switch-off-border-color = #dcdee2;
+$switch-off-bgc = #fff;
+$color-white = #FFF;
+$switch-on-bgc = #2d8cf0;
 
-.cube-switch {
+.i-switch {
   display: flex;
   position: relative;
   align-items: center;
 
-  .cube-switch-input {
+  .i-input {
     position: absolute;
     z-index: 1;
     width: $switch-width;
     height: $switch-height;
     opacity: 0;
 
-    &:checked + .cube-switch-ui {
+    &:checked + .i-switch-ui {
       border-color: $switch-on-bgc;
       background-color: $switch-on-bgc;
-
-      &::before {
-        transform: scale(0);
-      }
 
       &::after {
         transform: translateX($switch-width - $switch-height);
       }
-    }
 
-    &:disabled + .cube-switch-ui {
-      opacity: 0.3;
+      &::before {
+        transform: scale(0);
+      }
     }
   }
 
-  .cube-switch-ui {
+  .i-switch-ui {
     position: relative;
     display: block;
     width: $switch-width;
@@ -89,7 +87,6 @@ $switch-height = 28px;
     box-sizing: content-box;
     border: 1px solid $switch-off-border-color;
     border-radius: $switch-height;
-    background-color: $switch-off-border-color;
 
     &::before, &::after {
       content: '';
@@ -107,15 +104,6 @@ $switch-height = 28px;
       width: $switch-height;
       background-color: $color-white;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-    }
-  }
-
-  .cube-switch-label {
-    display: block;
-    margin-left: 10px;
-
-    &:empty {
-      margin-left: 0;
     }
   }
 }

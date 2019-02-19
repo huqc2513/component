@@ -2,10 +2,8 @@ import './waves.css'
 
 export default{
   bind (el, binding) {
- 
     el.addEventListener('click', e => {
-   
-        console.error(binding)
+      console.error(binding)
       const customOpts = Object.assign({}, binding.value)
       const opts = Object.assign({
         ele: el, // 波纹作用元素
@@ -22,7 +20,7 @@ export default{
         if (!ripple) {
           ripple = document.createElement('span')
           ripple.className = 'waves-ripple'
-     
+
           ripple.style.height = ripple.style.width = Math.max(rect.width, rect.height) + 'px'
           target.appendChild(ripple)
         } else {
@@ -30,7 +28,7 @@ export default{
         }
 
         console.error(opts)
-        
+
         switch (opts.type) {
           case 'center':
             ripple.style.top = (rect.height / 2 - ripple.offsetHeight / 2) + 'px'
