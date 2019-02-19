@@ -7,7 +7,7 @@ export default new Router ({
   routes: [
     {
       path: '/',
-      redirect: '/home',
+      redirect: '/form',
       meta: {
         title: '',
       },
@@ -67,6 +67,10 @@ export default new Router ({
       meta: {
         title: '日历',
       },
+    },
+    {
+      path: '*',
+      redirect: '/form',
     },
   ],
 });
