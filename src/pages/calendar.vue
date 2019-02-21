@@ -1,8 +1,6 @@
 <template>
   <div>
-
     <calendar :isSingle="true" :dataList="list" timeKey="onDate"></calendar>
-cl
   </div>
 </template>
 

@@ -5,5 +5,16 @@ import verificationCode from './verificationCode/index';
 import Checkbox from './checkbox/checkbox.vue';
 import CheckboxGroup from './checkbox/checkbox-group.vue';
 import Iswitch from './switch/switch.vue';
+import Select from './select/select.vue';
+import Options from './select/Options.vue';
 
-export {button, Checkbox, CheckboxGroup, input, verificationCode, Iswitch};
+export {
+  button,
+  Select,
+  Options,
+  Checkbox,
+  CheckboxGroup,
+  input,
+  verificationCode,
+  Iswitch,
+};

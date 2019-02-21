@@ -17,7 +17,9 @@
 
 <script type="text/ecmascript-6">
 import { marquee, marqueeItem } from "@/components/marquee/index";
+
 import switchBox from "@/components/switch/switch";
+
 import popup from "@/components/popup/popup";
 import Waves from "@/directives/waves.js";
 
