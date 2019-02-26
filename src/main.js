@@ -15,7 +15,6 @@ import toast from "./components/toast/index";
 import notiFication from "./components/notiFication/index";
 
 // import VueWechatTitle from "vue-wechat-title";  
-
 //  Vue.use(VueWechatTitle);
 
 

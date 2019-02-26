@@ -36,7 +36,7 @@ export default {
         stop: 40
       },
       index: 1,
-      list: [1, 50, 1, 50, 1, 50, 1, 50, 1, 50],
+      list: [1, 50, 1, 50, 1, 50],
       obj: {
         count: 0
       },
@@ -50,7 +50,7 @@ export default {
   mounted() {},
   methods: {
     pullingUp() {
-      let list = [13, 13, 15, 153, 132, 1];
+      let list = [13, 132, 1];
       setTimeout(() => {
         this.index++;
         if (this.index >= 3) {

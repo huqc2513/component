@@ -25,7 +25,7 @@
 
     <div class="row-title">
       select
-      <Select v-model="value1" @onChange="selectChange" placeholder="请选择">
+      <Select v-model="value1" @onChange="onChange" placeholder="请选择">
         <Option value="1">测试1</Option>
         <Option value="2">测试2</Option>
         <Option value="3">测试3</Option>
@@ -38,6 +38,10 @@
     </div>
 
     <div>{{ value1 }}</div>
+
+    <div class="row-title">
+      Picker
+    </div>
   </div>
 </template>
 
@@ -49,13 +53,12 @@ import {
   Select,
   Options as Option
 } from "@/components/form/index.js";
-import switchBox from "@/components/switch/switch";
 
 import Emitter from "util/base.js";
 
 export default {
   methods: {
-    selectChange(val) {
+    onChange(val) {
       console.log(val);
     }
   },
@@ -64,7 +67,12 @@ export default {
       value1: "1",
       arr: ["1"],
       value: false,
-      switchFlag: false
+      switchFlag: false,
+      pickerData: [
+        ["test", "test2", "test3"],
+        ["test", "test2", "test3"],
+        ["test", "test2", "test3"]
+      ]
     };
   },
   mixins: [Emitter],

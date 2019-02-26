@@ -69,6 +69,13 @@ export default new Router ({
       },
     },
     {
+      path: '/pullRefresh',
+      component: resolve => require (['../pages/pull-refresh.vue'], resolve),
+      meta: {
+        title: '上啦刷新',
+      },
+    },
+    {
       path: '*',
       redirect: '/form',
     },

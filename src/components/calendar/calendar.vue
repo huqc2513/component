@@ -1,18 +1,15 @@
 <template>
   <div>
-
     <div class="current-month">
-
       <div class="header-btn">
-
-        <ul v-if="monthList.length>0">
+        <ul v-if="monthList.length > 0">
           <li
-            :class="{'active-tab':index==activeTab }"
-            v-for="(item,index) in monthList"
+            :class="{ 'active-tab': index == activeTab }"
+            v-for="(item, index) in monthList"
             :key="index"
-            @click="calculateTimeList(item.year,item.month ,index)"
+            @click="calculateTimeList(item.year, item.month, index)"
           >
-            {{item.month}}月
+            {{ item.month }}月
           </li>
         </ul>
         <!---->
@@ -26,7 +23,6 @@
         <!--<div class="icon-wrap" @click="calculateTimeList('next')">-->
         <!--<span class="triangle-right"></span>-->
         <!--</div>-->
-
       </div>
 
       <p class="weekDay_text">
@@ -40,128 +36,119 @@
       </p>
 
       <div>
-
         <div class="date-list-wrapper">
-          <ul
-            v-for="(items, index) in list"
-            :key="index"
-          >
-
+          <ul v-for="(items, index) in list" :key="index">
             <li
               v-for="(item, idx) in items"
-              @click="select(item,index,idx)"
+              @click="select(item, index, idx)"
               :key="item.time"
               :class="[
-                   {
-                      'active':item.active,
-                      'start-active': startTime  && item.StartActive==true,
-                      'end-active': endTime  &&  item.EndActive ==true,
-                      'singleClickActive': item.singleClickActive
-                   }
-                ]"
+                {
+                  active: item.active,
+                  'start-active': startTime && item.StartActive == true,
+                  'end-active': endTime && item.EndActive == true,
+                  singleClickActive: item.singleClickActive
+                }
+              ]"
             >
               <div class="item-wrap">
-
                 <!--酒店入住离开-->
                 <p
-                  v-if="item.StartActive  ||  item.EndActive"
-                  :style="{color: '#Fff'}"
-                  :class="[
-                        'remainder',
-                        { 'show':  true}
-                   ]"
+                  v-if="item.StartActive || item.EndActive"
+                  :style="{ color: '#Fff' }"
+                  :class="['remainder', { show: true }]"
                 >
-                  {{ item.StartActive ? '入住' : item.EndActive ?'离店':'' }}
+                  {{ item.StartActive ? "入住" : item.EndActive ? "离店" : "" }}
                 </p>
 
                 <!--酒店-->
                 <p
-                  v-if="item.sum !==undefined && !item.singleClickActive"
-                  :style="{color:!item.active? '#F36A05':'#Fff'}"
+                  v-if="item.sum !== undefined && !item.singleClickActive"
+                  :style="{ color: !item.active ? '#F36A05' : '#Fff' }"
                   :class="[
-                        'remainder',
-                        { 'show': item.sum !==undefined  &&  false  }
-                   ]"
+                    'remainder',
+                    { show: item.sum !== undefined && false }
+                  ]"
                 >
-                  余{{item.sum}}
+                  余{{ item.sum }}
                 </p>
 
                 <p
-                  v-if="item.singleClickActive "
-                  :style="{color: '#Fff'}"
-                  :class="[
-                        'remainder',
-                        { 'show':  false}
-                   ]"
+                  v-if="item.singleClickActive"
+                  :style="{ color: '#Fff' }"
+                  :class="['remainder', { show: false }]"
                 >
                   已选
                 </p>
 
-                <p :class="['item-time',{ 'disabled ':item.disabled ,'white':item.singleClickActive}]"> {{ item.showDate}}</p>
+                <p
+                  :class="[
+                    'item-time',
+                    {
+                      'disabled ': item.disabled,
+                      white: item.singleClickActive
+                    }
+                  ]"
+                >
+                  {{ item.showDate }}
+                </p>
 
                 <!--通用价格-->
                 <p
                   v-if="showPrice"
                   :class="{
-                          'item-price':true,
-                          'base-color':!item.active ,
-                         'white':item.singleClickActive,
-                          'active-color':item.active ,
-                          'show': typeof item.price ==='undefined'
-                       }"
+                    'item-price': true,
+                    'base-color': !item.active,
+                    white: item.singleClickActive,
+                    'active-color': item.active,
+                    show: typeof item.price === 'undefined'
+                  }"
                 >
-                  ￥{{ item.price}}
+                  ￥{{ item.price }}
                 </p>
 
                 <!--儿童价格-->
                 <p
                   v-if="showChildPrice"
                   :class="{
-                      'item-price':true,
-                      'base-color':!item.active ,
-                      'active-color':item.active ,
-                      'show': typeof item.childPrice ==='undefined'
-                   }"
+                    'item-price': true,
+                    'base-color': !item.active,
+                    'active-color': item.active,
+                    show: typeof item.childPrice === 'undefined'
+                  }"
                 >
-                  ￥{{ item.childPrice}}
+                  ￥{{ item.childPrice }}
                 </p>
 
                 <!--成人价格-->
                 <p
                   v-if="showAuitPrice"
                   :class="{
-                            'item-price':true,
-                            'base-color':!item.active ,
-                            'active-color':item.active ,
-                            'show': typeof item.auitPrice ==='undefined'
-                            }"
+                    'item-price': true,
+                    'base-color': !item.active,
+                    'active-color': item.active,
+                    show: typeof item.auitPrice === 'undefined'
+                  }"
                 >
-                  ￥{{ item.auitPrice}}
+                  ￥{{ item.auitPrice }}
                 </p>
-
               </div>
-
             </li>
           </ul>
         </div>
-
       </div>
-
     </div>
-    <span style="visibility: hidden">{{yearAndMonth}}</span>
+    <span style="visibility: hidden">{{ yearAndMonth }}</span>
   </div>
-
 </template>
 
 <script type="text/ecmascript-6">
-
-
 import {
   dateToString,
   initTime,
   convertDateFromString,
   findIndex
-} from "@/assets/js/date";
+} from "./date.js";
 
 export default {
   created() {
@@ -302,7 +289,7 @@ export default {
       let i = 0;
       let year = date.getFullYear();
 
-      while (i < 5) {
+      while (i < 12) {
         if (month <= 12) {
           monthList.push({
             active: i == 0 ? true : false,
@@ -564,6 +551,7 @@ export default {
       this.year = year;
       this.month = month;
       this.arrangeArr = days;
+      console.error(days);
     },
     chuck(arr, nub) {
       let result = [];
