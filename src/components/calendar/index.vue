@@ -1,27 +1,17 @@
 <template>
-    <div>
-        dsf
-
-    </div>
+  <div>
+    dsf
+  </div>
 </template>
 
 <script>
+import format from "./util";
 
-    import format from './util'
+console.log(format(new Date(), "YYYY-MM-DD HH:mm:ss"));
 
-    console.log(format(new Date(),'YYYY-MM-DD HH:mm:ss'))
-
-
-    export default {
-
-    }
-
-
+export default {};
 </script>
 
 <style lang="scss" scoped>
-
-    @import "../../assets/styles/base/fn";
-
-
+@import "../../assets/styles/base/fn";
 </style>

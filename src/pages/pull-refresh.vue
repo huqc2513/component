@@ -5,15 +5,20 @@
         <li v-for="(item, index) in list" :key="index">{{ index }}</li>
       </ul>
     </PullRefresh>
+
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 import PullRefresh from "@/components/pull-refresh/index";
 
+import Circular from '@/components/pull-refresh/circular'
+
+
 export default {
   components: {
-    PullRefresh
+    PullRefresh,
+    Circular
   },
   data() {
     return {
@@ -28,8 +33,17 @@ export default {
       ]
     };
   },
-  created() {},
+  created() {
+    this.isPhone();
+  },
   methods:{
+    isPhone(){
+      if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+          console.log('iPhone')
+      } else {
+               console.log('pc')
+      }
+    },
     pullingDown(i) {
       let list = [13, 13];
       setTimeout(() => {

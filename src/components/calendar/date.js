@@ -42,6 +42,37 @@ Date.prototype.format = function (format) {
   return format;
 };
 
+
+function GetLastDayOfLastMonth(year,month){
+  let  lastDayOfLastMonth = new Date (year, month - 1, 0); //上个月的最后一天
+  let lastDayOfMonth = lastDayOfLastMonth.getDate(); //上个月最后
+  let lastdayWeekofMonth = lastDayOfLastMonth.getDay();
+  // let lastdayofMothDay = dateToString(lastDayOfLastMonth)
+  return {
+    lastDayOfMonth,lastdayWeekofMonth,
+  }
+}
+
+function isToday(str) {
+  if (new Date(str).toDateString() === new Date().toDateString()) {
+      return true
+  } else{
+      return false
+  }
+}
+
+
+function getfirstDayOfMonth (year,month){
+  var firstDay = new Date (year, month - 1, 1);
+  return  firstDay.getDay()
+}
+
+function getLastDay (year,month){
+ var lastDay = new Date (year, month, 0); 
+  return lastDay.getDate();
+}
+
+
 export function initTime (year, month) {
   let datapicker = {};
 
@@ -54,56 +85,61 @@ export function initTime (year, month) {
     }
 
     var firstDay = new Date (year, month - 1, 1);
-    var firDayWeekDay = firstDay.getDay (); //获取当月1号的星期0~6
-
     year = firstDay.getFullYear ();
     month = firstDay.getMonth () + 1;
 
-    var lastDayOfLastMonth = new Date (year, month - 1, 0); //上个月的最后一天
 
-    var lastDateOfLastMonth = lastDayOfLastMonth.getDate (); //上月最后一天的日期   31
+    let { lastDayOfMonth } =  GetLastDayOfLastMonth(year,month)
+    let firstDayWeek = getfirstDayOfMonth(year,month)
+    let LastDayOfMonth = getLastDay(year,month)
 
-    var preMonthDayCount = firDayWeekDay;
-    var lastDay = new Date (year, month, 0); //本月最后一天
-    var lastDate = lastDay.getDate (); //本月最后一天日期1~31
+    let firstDayofNextMonthConunt = 0,firstDayWeekCount= firstDayWeek,currentMonthCount=0,nextMonthCount=0;
 
-    for (var i = 0; i < 7 * 5; i++) {
-      // preMonthDayCount  单月第一天属于周几
-      //1+1 - preMonthDayCount    公式为   1 -   单月第一天周几，求出差值
+    for (var i = 0; i <7 * 5 ; i++) {
+      var date,time
 
-      var date = i + 2 - preMonthDayCount;
-      var showDate = date;
-      var thisMonth = month;
+      if(firstDayWeek===0){
+        if(i===0){
+          date  =  new Date (year, month - 1, 1)
+        }else if(i>LastDayOfMonth){
+          date  =  new Date (year, month - 1, ++firstDayofNextMonthConunt)
+        }
 
-      //日期
-      var time = dateToString (new Date (year, month - 1, showDate));
-      var weekList = new Array (7, 1, 2, 3, 4, 5, 6);
-      var week = convertDateFromString (time).getDay ();
-      week = weekList[week];
-      var ms = convertDateFromString (time).getTime ();
+        time = dateToString (date);
+      }else{
+        firstDayWeekCount--
 
-      //上一个月    date小于0  用上一个月的最后一天的天数+上 本月第一天的差值进行补位
-      if (date <= 0) {
-        thisMonth = month - 1;
-        showDate = lastDateOfLastMonth + date;
-      } else if (date > lastDate) {
-        //    下一个月
-        thisMonth = month + 1;
-        showDate = showDate - lastDate;
+        let Lastday
+          // 上月最后一天，减去本月第一天的星期数，来补缺少的天数，周日为0 ，日历第一天是周日
+        if(i===0){
+          Lastday =  lastDayOfMonth + 1 - firstDayWeek
+        }
+       
+
+        if(firstDayWeekCount>=0){
+          Lastday =  lastDayOfMonth - firstDayWeekCount
+          date  =  new Date (year, month - 2, Lastday)
+        }else if( i < (LastDayOfMonth +firstDayWeek)){
+          date  =  new Date (year, month - 1, ++currentMonthCount)
+        }else{
+          nextMonthCount++
+          date  =  new Date (year, month ,nextMonthCount )
+        }
+        time = dateToString (date);
+
       }
 
-      if (thisMonth == 0) thisMonth = 12;
-      if (thisMonth == 13) thisMonth = 1;
-
       ret.push ({
-        month: thisMonth,
-        date: date,
-        showDate: showDate,
-        time: time,
-        ms: ms,
-        week: week,
+        time,
+        date,
+        day:date.getDate(),
+        month:date.getMonth()+1,
+        year,
+        // isToday:isToday(date),
       });
     }
+
+    // debugger 
 
     return {
       year: year,
@@ -117,7 +153,7 @@ export function initTime (year, month) {
 
 function getCountDays () {
   var curDate = new Date ();
-  var curMonth = curDate.getMonth ();
+  var curMonth = curDate.getMonth();
   curDate.setMonth (curMonth + 1);
   curDate.setDate (0);
   return curDate.getDate ();

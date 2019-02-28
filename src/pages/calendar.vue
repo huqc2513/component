@@ -1,16 +1,20 @@
 <template>
   <div>
-    <calendar :isSingle="true" :dataList="list" timeKey="onDate"></calendar>
+    <!-- <calendar :isSingle="true" :dataList="list" timeKey="onDate"></calendar> -->
+
+    <newCalendar/>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 
   import calendar from "@/components/calendar/calendar.vue";
+  import newCalendar from '@/components/calendar/newCalendar/DatePicker.vue'
 
   export default {
     components: {
-      calendar
+      calendar,
+      newCalendar
     },
     data() {
       return {

@@ -82,13 +82,10 @@ export default {
 </script>
 
 <style  scoped lang="less">
-@ease-in-out : ease-in-out;
-@animation-time : .3s;
-@transition-time : .2s;
 
-div {
-  box-sizing: border-box;
-}
+@import '../../../common/comon.less';
+
+
 .active-border {
   box-shadow: 0 0 0 2px rgba(51, 153, 255, 0.2);
   outline: 0;
@@ -96,71 +93,6 @@ div {
 .placeholder-text {
   color: #c3cbd6;
   font-size: 12px;
-}
-
-.slide-motion(@className, @keyframeName) {
-  .make-motion(@className, @keyframeName);
-  .@{className}-enter-active,
-  .@{className}-appear {
-    opacity: 0;
-    animation-timing-function: @ease-in-out;
-    transform-origin: top;
-  }
-
-  .@{className}-leave-active {
-    transform-origin: top;
-    animation-timing-function: @ease-in-out;
-  }
-}
-
-.motion-common() {
-  animation-duration: @animation-time;
-  animation-fill-mode: both;
-}
-
-.make-motion(@className, @keyframeName) {
-  .@{className}-enter-active,
-  .@{className}-appear {
-    .motion-common();
-    animation-play-state: paused;
-  }
-  .@{className}-leave-active {
-    .motion-common();
-    animation-play-state: paused;
-  }
-  .@{className}-enter-active,
-  .@{className}-appear {
-    animation-name: ~"@{keyframeName}In";
-    animation-play-state: running;
-  }
-  .@{className}-leave-active {
-    animation-name: ~"@{keyframeName}Out";
-    animation-play-state: running;
-  }
-}
-
-.slide-motion(transition-drop, ivuTransitionDrop);
-
-@keyframes ivuTransitionDropIn {
-  0% {
-    opacity: 0;
-    transform: scaleY(0.8);
-  }
-  100% {
-    opacity: 1;
-    transform: scaleY(1);
-  }
-}
-
-@keyframes ivuTransitionDropOut {
-  0% {
-    opacity: 1;
-    transform: scaleY(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scaleY(0.8);
-  }
 }
 
 .i-select-box {
@@ -191,7 +123,6 @@ div {
     z-index: 9999;
     background: #fff;
     overflow-y: scroll;
-    // border: 1px solid #d8d8d8;
   }
 }
 </style>
