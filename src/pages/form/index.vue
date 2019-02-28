@@ -1,13 +1,15 @@
 <template>
-  <div>
+  <div class="box">
     <div class="row-title">Checkbox</div>
-    <div class="row">
+
+    <div class="content">
       <p class="title">Checkbox</p>
       <Checkbox v-model="value" label="毒液" />
     </div>
-    <div>{{ value }}</div>
 
-    <div class="row">
+    <!-- <div class='val'>{{ value }}</div> -->
+
+    <div class="content">
       <p class="title">CheckboxGroup</p>
       <CheckboxGroup v-model="arr">
         <Checkbox label="1" />
@@ -15,16 +17,16 @@
         <Checkbox label="3" />
       </CheckboxGroup>
     </div>
-    <div>{{ arr }}</div>
+    <div class="val">{{ arr }}</div>
 
-    <div class="row-title">
-      switch
+    <div class="row-title">switch</div>
+    <div class="content">
       <Iswitch v-model="switchFlag"> </Iswitch>
     </div>
-    <div>{{ switchFlag }}</div>
+    <div class="val">{{ switchFlag }}</div>
 
-    <div class="row-title">
-      select
+    <div class="row-title">select</div>
+    <div class="content">
       <Select v-model="value1" @onChange="onChange" placeholder="请选择">
         <Option value="1">测试1</Option>
         <Option value="2">测试2</Option>
@@ -36,12 +38,14 @@
         <Option value="44">测试4</Option>
       </Select>
     </div>
+    <div class="val">{{ value1 }}</div>
 
-    <div>{{ value1 }}</div>
+    <div class="row-title">Picker</div>
 
-    <div class="row-title">
-      Picker
+    <div class="content">
+      <DataPicker v-model="strDate"></DataPicker>
     </div>
+    <div class="val">{{ strDate }}</div>
   </div>
 </template>
 
@@ -53,6 +57,8 @@ import {
   Select,
   Options as Option
 } from "@/components/form/index.js";
+
+import DataPicker from "@/components/calendar/newCalendar/DatePicker";
 
 import Emitter from "util/base.js";
 
@@ -68,11 +74,7 @@ export default {
       arr: ["1"],
       value: false,
       switchFlag: false,
-      pickerData: [
-        ["test", "test2", "test3"],
-        ["test", "test2", "test3"],
-        ["test", "test2", "test3"]
-      ]
+      strDate: "2018-03-01"
     };
   },
   mixins: [Emitter],
@@ -81,38 +83,16 @@ export default {
     CheckboxGroup,
     Iswitch,
     Select,
-    Option
+    Option,
+    DataPicker
   }
 };
 </script>
 
-<style scoped lang="stylus" rel="stylesheet/stylus">
-.row-title {
-  display: block;
-  margin: 10px 20px;
-  padding: 0 10px;
+<style scoped lang="less" rel="stylesheet/stylus">
+.content {
   text-align: left;
-  height: 40px;
-  line-height: 40px;
-  font-weight: bold;
-  position: relative;
-
-  &::after {
-    display: inline-block;
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    height: 40%;
-    width: 2px;
-    background: #2d8cf0;
-  }
-}
-
-.row {
-  text-align: left;
-  padding: 10px 40px;
+  margin: 10px 40px;
 
   .title {
     padding-bottom: 5px;
@@ -120,13 +100,33 @@ export default {
   }
 }
 
-.triangle-up {
-  display: block;
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 10px solid #dddddd;
+.val {
+  margin: 5px 40px;
+}
+
+.box {
+  .row-title {
+    display: block;
+    margin: 10px 20px;
+    padding: 0 10px;
+    text-align: left;
+    height: 40px;
+    line-height: 40px;
+    font-weight: bold;
+    position: relative;
+
+    &::before {
+      display: inline-block;
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      height: 40%;
+      width: 2px;
+      background: #2d8cf0;
+    }
+  }
 }
 </style>
 

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "better-scroll": "^1.12.1",
+    "popper.js": "^1.14.7",
     "v-click-outside-x": "^3.7.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"

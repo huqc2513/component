@@ -12,9 +12,9 @@
     </slot>
     <div
       class="pull-content"
-      @touchstart="touchStart"
-      @touchmove="touchMove"
-      @touchend="touchEnd"
+      @touchstart.stop="touchStart"
+      @touchmove.stop="touchMove"
+      @touchend.stop="touchEnd"
       ref="pullContent"
     >
       <slot></slot>
@@ -25,7 +25,7 @@
 import IconFont from "./iconFont.vue";
 import Loading from '../loading/loading'
 
-const map_pull_status = {
+const pull_status_map = {
   0: "下拉刷新",
   1: "立即释放刷新",
   3: "刷新中...",
@@ -56,7 +56,7 @@ export default {
   },
   computed: {
     pullText() {
-      let text = map_pull_status[this.pullStatus];
+      let text = pull_status_map[this.pullStatus];
       return text || "下拉刷新";
     }
   },
