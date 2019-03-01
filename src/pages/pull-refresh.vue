@@ -45,7 +45,7 @@ export default {
       }
     },
     pullingDown(i) {
-      let list = [13, 13];
+      let list = [13, 13,13, 13,13, 13,13, 13,13, 13,];
       setTimeout(() => {
         this.list = this.list.concat(list);
       }, 1000);
