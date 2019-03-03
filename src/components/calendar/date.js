@@ -1,4 +1,5 @@
 export function dateToString (date) {
+  if(!date){return }
   var year = date.getFullYear ();
   var month = (date.getMonth () + 1).toString ();
   var day = date.getDate ().toString ();
@@ -87,7 +88,7 @@ export function initTime (year, month) {
     var firstDay = new Date (year, month - 1, 1);
     year = firstDay.getFullYear ();
     month = firstDay.getMonth () + 1;
-
+    month = 9
 
     let { lastDayOfMonth } =  GetLastDayOfLastMonth(year,month)
     let firstDayWeek = getfirstDayOfMonth(year,month)
@@ -102,10 +103,13 @@ export function initTime (year, month) {
         if(i===0){
           date  =  new Date (year, month - 1, 1)
         }else if(i>LastDayOfMonth){
-          date  =  new Date (year, month - 1, ++firstDayofNextMonthConunt)
+          date  =  new Date (year, month , ++firstDayofNextMonthConunt)
+        }else{
+          date  =  new Date (year, month - 1, i+1)
         }
 
         time = dateToString (date);
+
       }else{
         firstDayWeekCount--
 
@@ -139,7 +143,6 @@ export function initTime (year, month) {
       });
     }
 
-    // debugger 
 
     return {
       year: year,
@@ -170,9 +173,7 @@ export function findIndex (ary, fn) {
   if (ary.findIndex) {
     return ary.findIndex (fn);
   }
-  /* istanbul ignore next */
   let index = -1;
-  /* istanbul ignore next */
   ary.some (function (item, i, ary) {
     const ret = fn.call (this, item, i, ary);
     if (ret) {
@@ -180,16 +181,12 @@ export function findIndex (ary, fn) {
       return ret;
     }
   });
-  /* istanbul ignore next */
   return index;
 }
 
 export function _matchWeek (time) {
   var show_day = new Array ('星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日');
-
   var week = convertDateFromString (time).getDay ();
-
   week = show_day[week];
-
   return week;
 }

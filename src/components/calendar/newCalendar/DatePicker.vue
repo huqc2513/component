@@ -12,8 +12,14 @@
         @focus="open"
       />
       <transition name="transition-drop">
-        <div v-show="isOpen" class="calendar-wrap" ref='CanledarBox'>
-          <Calendar @change="changeTime" :value='value' />
+        <div v-show="isOpen" class="calendar-wrap" ref="CanledarBox">
+          <Calendar
+            :year="year"
+            :minDate="minDate"
+            :month="month"
+            @change="changeTime"
+            @changeMonth="changeMonth"
+          />
         </div>
       </transition>
     </div>
@@ -24,6 +30,11 @@
 import Calendar from "./index.vue";
 
 import { directive as clickOutside } from "v-click-outside-x";
+import { dateToString } from "../date.js";
+
+let date = new Date();
+let year = date.getFullYear();
+let month = date.getMonth() + 1;
 
 export default {
   directives: { clickOutside },
@@ -32,45 +43,45 @@ export default {
   },
   data() {
     return {
-      year: 2019,
-      month: 4,
+      year: year,
+      month: month,
       currenValue: this.value,
       isOpen: false,
+      minDate:null,
       valueObj: {}
     };
   },
-  props: {
-    value: {
-      type: String,
-      validator: data => {
-        if (isNaN(data) && !isNaN(Date.parse(data))) {
-          return true;
-        }
-      }
+  watch: {
+    value(e) {
+      this.parseValue(e)
     }
   },
-  mounted(){
+  props: {
+    value: {
+      type: String
+    }
+  },
+  mounted() {
     this.CanledarBox = this.$refs.CanledarBox;
-    console.log(this.CanledarBox.offsetTop)
- },
+  },
   created() {
-    let obj = this.StringTimeParse(this.value);
-    if(obj){
-      let { year ,month } = obj
-      this.year = year
-      this.month = month
-    }  
+    this.parseValue(this.value)
   },
   methods: {
+    parseValue(val){
+      if (typeof val == "string") {
+        this.minDate = new Date(Date.parse(val));
+      }
+      
+    },
     StringTimeParse(data) {
       data = Date.parse(data);
       if (!isNaN(data)) {
-
         let obj = new Date(data);
         return {
-          month:obj.getMonth()+1,
-          year:obj.getFullYear()
-        }
+          month: obj.getMonth() + 1,
+          year: obj.getFullYear()
+        };
       }
     },
     open() {
@@ -80,17 +91,21 @@ export default {
       if (!this.IsStrDate(this.value)) {
         this.currenValue = null;
       } else {
-        this.currenValue = this.valueObj.time;
+        this.currenValue = this.valueObj;
       }
       this.isOpen = false;
     },
     changeTime(item) {
-      let { year, month, time } = item;
-      this.currenValue = time;
+      item = dateToString(item);
+      this.minDate = item
+      this.currenValue = item;
       this.valueObj = item;
-      this.isOpen = false;
-
       this.$emit("input", this.currenValue);
+      this.isOpen = false;
+    },
+    changeMonth(y, m) {
+      this.year = y;
+      this.month = m;
     },
     IsStrDate(data) {
       if (isNaN(data) && !isNaN(Date.parse(data))) {

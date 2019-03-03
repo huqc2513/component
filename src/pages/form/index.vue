@@ -7,8 +7,6 @@
       <Checkbox v-model="value" label="毒液" />
     </div>
 
-    <!-- <div class='val'>{{ value }}</div> -->
-
     <div class="content">
       <p class="title">CheckboxGroup</p>
       <CheckboxGroup v-model="arr">
@@ -40,15 +38,24 @@
     </div>
     <div class="val">{{ value1 }}</div>
 
-    <div class="row-title">Picker</div>
-
+    <div class="row-title">DatePicker</div>
     <div class="content">
-      <DataPicker v-model="strDate"></DataPicker>
+      <DatePicker v-model="start"></DatePicker>
     </div>
-    
-    <div class="val">{{ strDate }}</div>
+    <div class="val">{{ start }}</div>
+
+    <div class="row-title">DatePickerRange</div>
+    <div class="content">
+      <DatePickerRange v-model="arr1"></DatePickerRange>
+    </div>
+    <div class="val">{{ arr1 }}</div>
   </div>
 </template>
+
+
+
+
+
 
 <script type="text/ecmascript-6">
 import {
@@ -59,7 +66,8 @@ import {
   Options as Option
 } from "@/components/form/index.js";
 
-import DataPicker from "@/components/calendar/newCalendar/DatePicker";
+import DatePicker from "@/components/calendar/newCalendar/DatePicker.vue";
+import DatePickerRange from "@/components/calendar/newCalendar/datePickerRange.vue";
 
 import Emitter from "util/base.js";
 
@@ -73,9 +81,10 @@ export default {
     return {
       value1: "1",
       arr: ["1"],
+      arr1: ["2019-03-1", "2019-03-10"],
       value: false,
       switchFlag: false,
-      strDate: "2018-03-01"
+      start: "2019-03-01"
     };
   },
   mixins: [Emitter],
@@ -85,7 +94,8 @@ export default {
     Iswitch,
     Select,
     Option,
-    DataPicker
+    DatePicker,
+    DatePickerRange
   }
 };
 </script>
@@ -118,7 +128,7 @@ export default {
 
     &::before {
       display: inline-block;
-      content: '';
+      content: "";
       position: absolute;
       top: 50%;
       left: 0;

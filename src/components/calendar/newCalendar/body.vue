@@ -12,35 +12,23 @@
       </p>
 
       <div>
-        <div class="date-list-wrapper">
+        <div class="date-list-wrapper" @mousemove="handleMouseMove">
           <ul v-for="(items, index) in list" :key="index">
             <li
               v-for="(item, idx) in items"
               :key="idx"
-              @click="clickDay(item, index, idx)"
-              :class="[
-                {
-                  active: item.active,
-                  'start-active': startTime && item.StartActive == true,
-                  'end-active': endTime && item.EndActive == true,
-                  singleClickActive: item.singleClickActive
-                }
-              ]"
+              @click="handleClick(item, index, idx)"
             >
-              <div class="item-wrap">
-                <p
-                  :class="[
-                    'item-time',
-                    {
-                      disabled: item.disabled,
-                      currentMonth: item.month != month,
-                      clickDay: item.isClick
-                    }
-                  ]"
-                >
-                  {{ item.day }}
-                </p>
-              </div>
+              <Cell
+                :data-rowIndex="index"
+                :data-columnIndex="idx"
+                :list="list"
+                :item="item"
+                :startTime="startTime"
+                :endTime="endTime"
+                :month="month"
+                :chooseDate="chooseDate"
+              ></Cell>
             </li>
           </ul>
         </div>
@@ -50,22 +38,26 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {
-  dateToString,
-  initTime,
-  convertDateFromString,
-  findIndex
-} from "../date.js";
+import { dateToString, convertDateFromString, findIndex } from "../date.js";
+import { getData } from "./date.js";
+import Cell from "./cell.vue";
+
+import { findComponentUpward } from "util/index";
+
 
 export default {
   name: "i-calendar",
+  components: {
+    Cell
+  },
   created() {
-    this.$nextTick(() => {
-        //被点击过的时间
-      this.clickcacheObj = {};
       this.initData(this.year, this.month);
-    });
-  
+      this.calculateRange();
+  },
+  mounted(){
+      this.datePickerRange =  findComponentUpward(this,'i-datePickerRange')
+      // console.error('min',dateToString(this.minDate))
+      // console.error('starttime',dateToString(this.startTime))
   },
   watch: {
     year(val) {
@@ -73,14 +65,50 @@ export default {
     },
     month(val) {
       this.initData(this.year, val);
+    },
+    maxDate: {
+      handler(val) {
+        this.endTime = val;
+         this.calculateRange();
+      },
+      deep: true,
+      immediate:true,
+    },
+    minDate: {
+      handler(val) {
+        this.startTime = val;
+        console.log(val)
+         this.calculateRange();
+      },
+      deep: true,
+      immediate:true,
+    },
+    startTime: {
+      handler(val) {
+        this.calculateRange();
+        this.proxyEmit(val,this.endTime)
+      },
+      deep: true
+    },
+    endTime: {
+      handler(val) {
+        // console.log(dateToString(val),dateToString(this.startTime))
+        this.calculateRange();
+        this.proxyEmit(this.startTime,val)
+      },
+      deep: true
     }
   },
-  props: {
-    isMultiple: {
-      type: Boolean,
-      default: false
+  props: {  
+    type:String,
+    maxDate: {
+      type: Date,
+      defalut: null
     },
-    click: {
+    minDate: {
+      type: Date,
+    },
+    isMultiple: {
       type: Boolean,
       default: true
     },
@@ -95,91 +123,154 @@ export default {
   },
   data() {
     return {
-      activeTab: 0,
-      selectList: [],
       list: [],
-      startTime: null,
-      endTime: null,
-      monthList: [],
-      arrangeArr: []
+      startTime: this.minDate,
+      endTime: this.maxDate,
+      chooseDate: [],
+      datePickerRange:null
     };
   },
-  components: {},
+  update() {
+    this.startTime = this.minDate;
+    this.endTime = this.maxDate;
+  },
   methods: {
-    clickDay(item, index, idx) {
-  
-      if (this.isMultiple) {
-      
+    calculateRange(obj) {
+      let startTime = this.startTime;
+      let endTime = this.endTime;
+      let rows = this.list;
+
+      if (startTime && endTime) {
+        if (startTime > endTime) {
+          let tmp = startTime;
+          startTime = endTime;
+          endTime = tmp;
+        }
+
+        rows.forEach((row, index) => {
+          row.forEach((r, idx) => {
+
+            if (startTime <= r.date && r.date <=endTime) {
+
+              rows[index][idx].inRange = true;
+              this.list[index].splice(idx, 1, rows[index][idx]);
+            } else {
+              rows[index][idx].inRange = false;
+              this.list[index].splice(idx, 1, rows[index][idx]);
+            }
+          });
+        });
       } else {
+        rows.forEach((row, index) => {
+          row.forEach((r, idx) => {
+            rows[index][idx].inRange = false;
+          });
+        });
+      }
+    },
+    proxyEmit(min, max, isClickEvent = false) {
+      if(min!==max || (!max || !min)){
+        this.$emit("multipleChange", min, max,isClickEvent);
+      }
+    },
+    handleClick(item, index, idx) {
+      if (this.type=='rangeDate') {
+        let endTime = this.endTime,
+          startTime = this.startTime;
 
-        if(item.isClick){
-          return
-        }
-        item.isClick = true
-        //item.isClick = !item.isClick;
-       let clickItem = item;
+        if (!startTime && !endTime) {
+          startTime = item.date;
+        } else if (startTime && !endTime) {
+          endTime = item.date;
 
-        let cache = this.clickcacheObj;
-        let key = clickItem.time;
-        let arr = Object.keys(cache);
-        const pushCacheArr = (item, index, idx) => {
-          this.clickcacheObj[item.time] = {
-            item,
-            index,
-            idx
-          };
-        };
-
-        if (arr.length == 1) {
-          if (cache[key] == key) {
-            this.list[index].splice(idx, 1, clickItem);
-            this.clickcacheObj = {};
-            pushCacheArr(clickItem, index, idx);
-          } else {
-            let oldClickItem = cache[arr[0]];
-            let { index, idx, item } = oldClickItem;
-            item.isClick = false;
-            this.clickcacheObj = {};
-            pushCacheArr(clickItem, index, idx);
-            this.list[index].splice(idx, 1, item);
+          if (endTime < startTime) {
+            let tmp = startTime;
+            startTime = endTime;
+            endTime = tmp;
           }
-        } else if (arr.length == 0) {
-          pushCacheArr(item, index, idx);
-          this.list[index].splice(idx, 1, item);
+          this.proxyEmit(startTime, endTime, true);
+        } 
+        
+        if (startTime && endTime) {
+          if( this.datePickerRange.stopMove===false){
+              this.datePickerRange.stopMove = true
+              this.proxyEmit(startTime, endTime, true);
+          }else{
+              this.datePickerRange.stopMove = false
+              this.startTime = null;
+              this.endTime = null;
+              this.proxyEmit(null, null, true);
+          }
+
+          return;
         }
-      }
-      this.$emit("change", item);
-    },
 
+
+        this.proxyEmit(startTime, endTime, true);
+
+        this.startTime = startTime;
+        this.endTime = endTime;
+      } else {
+          this.startTime = item.date
+          this.$emit('change',item.date)
+      }
+    },
     initData(y, m) {
-      let { year, month, days } = initTime(y, m);
-      
-      const replaceDays = ()=>{
-
-        Object.keys(this.clickcacheObj).forEach(e=>{
-            let { item:cacheObj} =  this.clickcacheObj[e]
-            days.forEach((o,index)=>{
-                if(o.time == cacheObj.time){
-                    days[index]  = cacheObj
-                } 
-            })
-          })
-      }
-
-     replaceDays()
-
-      this.$nextTick(() => {
-        setTimeout(() => {
-          this.list = this.split(days, 7);
-        }, 20);
-      });
+      let { year, month, days } = getData(y, m);
+      this.list = this.splitArr(days, 7);
     },
-    split(arr, nub) {
+    splitArr(arr, nub) {
       let result = [];
       for (let i = 0, len = arr.length; i < len; i += nub) {
         result.push(arr.slice(i, i + nub));
       }
       return result;
+    },
+    getDateOfCell(row, column) {
+      return this.list[row][column];
+    },
+    reversal(cell) {
+      if (this.startTime && this.endTime) {
+        if (
+          this.endTime < this.startTime &&
+          this.endTime != cell.date
+        ) {
+          let tmp = this.startTime;
+          this.startTime = this.endTime;
+          this.endTime = tmp;
+        }
+      }
+    },
+    handleMouseMove() {
+      if(this.type !=='rangeDate'){
+        return
+      }
+      let target = event.target;
+      if (target.tagName === "EM") {
+        target = target.parentNode;
+      }
+      const row = target.dataset.rowindex;
+      const column = target.dataset.columnindex;
+
+      if (row !== undefined || column !== undefined) {
+        let cell = this.getDateOfCell(row, column);
+
+        const stopMove = this.datePickerRange.stopMove
+
+        if (this.startTime && cell && !stopMove) {
+            if (this.startTime !== cell.date) {
+             this.endTime = cell.date;
+            } 
+          // if (this.startTime.date < cell.date) {
+          //   this.endTime = cell;
+          // } else if (this.startTime.date > cell.date) {
+          //   this.endTime = cell;
+          // }
+          this.reversal(cell);
+        }
+
+
+      }
     }
   }
 };
@@ -326,16 +417,6 @@ h4 {
 
 .gray {
   color: #aaabaa;
-}
-.clickDay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff !important;
-  background-color: #409eff !important;
-  border-radius: 50%;
-  width: 28px !important;
-  height: 28px !important;
 }
 
 .weekDay_text {

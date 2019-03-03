@@ -1,17 +1,19 @@
 <template>
   <div class="iCalendar-header">
     <IconFont
+      v-show='showPrevBtn && type=="date"'
       class="icon-wrap"
       name="iconjiantouarrowheads3-copy"
       @click="prveYear"
     />
-    <IconFont class="icon-wrap" name="iconjiantou-copy" @click="prve" />
+    <IconFont v-show='showPrevBtn' class="icon-wrap" name="iconjiantou-copy" @click="prve" />
     <div class="title">
       <div class="year">{{ currentYear }}年</div>
       <div class="month">{{ currentMonth }}月</div>
     </div>
-    <IconFont class="icon-wrap" name="iconjiantou" @click="next" />
+    <IconFont  v-show='showNextBtn' class="icon-wrap" name="iconjiantou" @click="next" />
     <IconFont
+      v-show='showNextBtn  && type=="date"'
       class="icon-wrap"
       name="iconjiantouarrowheads3"
       @click="nextYear"
@@ -33,7 +35,13 @@ export default {
       currentMonth: this.month
     };
   },
+  created(){
+  },
   props: {
+    type:{
+      type:String,
+      default:'date'
+    },
     year: {
       type: [Number, String],
       default: 2019
@@ -41,8 +49,15 @@ export default {
     month: {
       type: [Number, String],
       default: 2
+    },
+    showPrevBtn: {
+      type: Boolean,
+      default: true
+    },
+    showNextBtn: {
+      type: Boolean,
+      default: true
     }
-    // current
   },
   watch: {
     year(val) {
