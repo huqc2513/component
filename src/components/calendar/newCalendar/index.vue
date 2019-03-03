@@ -72,7 +72,12 @@ export default {
   },
   
   craeted() {
-   
+    // let obj = this.StringTimeParse(this.value);
+    // if (obj) {
+    //   let { year, month } = obj;
+    //   this.year = year;
+    //   this.month = month;
+    // }
   },
   methods: {
     StringTimeParse(data) {

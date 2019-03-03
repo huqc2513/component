@@ -8,8 +8,8 @@
         type="text"
         class="i-input-wrap"
         placeholder="请选择日期"
-        v-model="currenValue"
         @focus="open"
+        v-model="currenValue"
       />
       <transition name="transition-drop">
         <div v-show="isOpen" class="calendar-wrap" ref="CanledarBox">
@@ -85,11 +85,6 @@ export default {
   props: {
     value: {
       type: [Array]
-      // validator: data => {
-      //   if (isNaN(data) && !isNaN(Date.parse(data))) {
-      //     return true;
-      //   }
-      // }
     }
   },
   watch: {
@@ -109,7 +104,6 @@ export default {
           this.minDate = newArr[0];
           this.maxDate = newArr[1];
           
-          // debugger
         }
       },
       deep: true,
@@ -173,7 +167,7 @@ export default {
       this.isOpen = true;
     },
     onClickOutside() {
-      if (!this.IsStrDate(this.value)) {
+       if (!this.minDate instanceof Date ||  !this.maxDate instanceof Date  ){
         this.currenValue = null;
       }
       this.isOpen = false;
@@ -186,16 +180,12 @@ export default {
         min = dateToString(min);
         max = dateToString(max);
         let ret = [min, max];
-        // this.currenValue = `${min} 至 ${max} `;\
         this.currenValue = ret.join(" ").replace(/\s/g, " 至 ");
         this.$emit("input", ret);
-
         this.isOpen = false;
       } else if(min && max){
-        // this.currenValue = null;
+      
       }
-
-
     },
     IsStrDate(data) {
       if (isNaN(data) && !isNaN(Date.parse(data))) {

@@ -79,6 +79,9 @@ export function getData(year,month) {
   }
 
 
+
+
+
   // if(month<12){
   //   if(result[result.length- 7].month == month+1 ){
   //     result = result.slice(0,result.length- 7)
@@ -101,6 +104,17 @@ export function getData(year,month) {
 
   }
 }
+
+
+export const prevDate = function(date, amount = 1) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() - amount);
+};
+
+export const nextDate = function(date, amount = 1) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + amount);
+};
+
+
 
 
 

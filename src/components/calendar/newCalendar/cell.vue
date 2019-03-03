@@ -87,8 +87,6 @@ export default {
         ret.push("clickActive");
       }
 
-        console.error(dateToString(startTime) == i.time,dateToString(startTime)==i.time )
-
 
       if (dateToString(startTime) == i.time) {
         ret.push("startDate");

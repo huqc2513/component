@@ -8,8 +8,8 @@
         type="text"
         class="i-input-wrap"
         placeholder="请选择日期"
-        v-model="currenValue"
         @focus="open"
+        v-model="currenValue"
       />
       <transition name="transition-drop">
         <div v-show="isOpen" class="calendar-wrap" ref="CanledarBox">
@@ -72,7 +72,6 @@ export default {
       if (typeof val == "string") {
         this.minDate = new Date(Date.parse(val));
       }
-      
     },
     StringTimeParse(data) {
       data = Date.parse(data);
@@ -88,10 +87,10 @@ export default {
       this.isOpen = true;
     },
     onClickOutside() {
-      if (!this.IsStrDate(this.value)) {
+      if (!this.minDate instanceof Date ){
         this.currenValue = null;
       } else {
-        this.currenValue = this.valueObj;
+        this.currenValue = dateToString(this.minDate)
       }
       this.isOpen = false;
     },

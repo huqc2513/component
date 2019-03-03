@@ -55,8 +55,6 @@
 
 
 
-
-
 <script type="text/ecmascript-6">
 import {
   Checkbox,
@@ -65,10 +63,8 @@ import {
   Select,
   Options as Option
 } from "@/components/form/index.js";
-
 import DatePicker from "@/components/calendar/newCalendar/DatePicker.vue";
 import DatePickerRange from "@/components/calendar/newCalendar/datePickerRange.vue";
-
 import Emitter from "util/base.js";
 
 export default {

@@ -39,11 +39,10 @@
 
 <script type="text/ecmascript-6">
 import { dateToString, convertDateFromString, findIndex } from "../date.js";
-import { getData } from "./date.js";
+import { getData,prevDate } from "./date.js";
 import Cell from "./cell.vue";
 
 import { findComponentUpward } from "util/index";
-
 
 export default {
   name: "i-calendar",
@@ -51,13 +50,13 @@ export default {
     Cell
   },
   created() {
-      this.initData(this.year, this.month);
-      this.calculateRange();
+    this.initData(this.year, this.month);
+    this.calculateRange();
   },
-  mounted(){
-      this.datePickerRange =  findComponentUpward(this,'i-datePickerRange')
-      // console.error('min',dateToString(this.minDate))
-      // console.error('starttime',dateToString(this.startTime))
+  mounted() {
+    this.datePickerRange = findComponentUpward(this, "i-datePickerRange");
+    // console.error('min',dateToString(this.minDate))
+    // console.error('starttime',dateToString(this.startTime))
   },
   watch: {
     year(val) {
@@ -69,44 +68,42 @@ export default {
     maxDate: {
       handler(val) {
         this.endTime = val;
-         this.calculateRange();
+        this.calculateRange();
       },
       deep: true,
-      immediate:true,
+      immediate: true
     },
     minDate: {
       handler(val) {
         this.startTime = val;
-        console.log(val)
-         this.calculateRange();
+        this.calculateRange();
       },
       deep: true,
-      immediate:true,
+      immediate: true
     },
     startTime: {
       handler(val) {
         this.calculateRange();
-        this.proxyEmit(val,this.endTime)
+        this.proxyEmit(val, this.endTime);
       },
       deep: true
     },
     endTime: {
       handler(val) {
-        // console.log(dateToString(val),dateToString(this.startTime))
         this.calculateRange();
-        this.proxyEmit(this.startTime,val)
+        this.proxyEmit(this.startTime, val);
       },
       deep: true
     }
   },
-  props: {  
-    type:String,
+  props: {
+    type: String,
     maxDate: {
       type: Date,
       defalut: null
     },
     minDate: {
-      type: Date,
+      type: Date
     },
     isMultiple: {
       type: Boolean,
@@ -127,7 +124,7 @@ export default {
       startTime: this.minDate,
       endTime: this.maxDate,
       chooseDate: [],
-      datePickerRange:null
+      datePickerRange: null
     };
   },
   update() {
@@ -149,9 +146,7 @@ export default {
 
         rows.forEach((row, index) => {
           row.forEach((r, idx) => {
-
-            if (startTime <= r.date && r.date <=endTime) {
-
+            if (startTime <= r.date && r.date <= endTime) {
               rows[index][idx].inRange = true;
               this.list[index].splice(idx, 1, rows[index][idx]);
             } else {
@@ -169,12 +164,15 @@ export default {
       }
     },
     proxyEmit(min, max, isClickEvent = false) {
-      if(min!==max || (!max || !min)){
-        this.$emit("multipleChange", min, max,isClickEvent);
+
+      if (!min && !max) {
+        this.$emit("multipleChange", null, null, isClickEvent);
+      } else if (min !== max) {
+        this.$emit("multipleChange", min, max, isClickEvent);
       }
     },
     handleClick(item, index, idx) {
-      if (this.type=='rangeDate') {
+      if (this.type == "rangeDate") {
         let endTime = this.endTime,
           startTime = this.startTime;
 
@@ -189,30 +187,29 @@ export default {
             endTime = tmp;
           }
           this.proxyEmit(startTime, endTime, true);
-        } 
-        
+        }
+
         if (startTime && endTime) {
-          if( this.datePickerRange.stopMove===false){
-              this.datePickerRange.stopMove = true
-              this.proxyEmit(startTime, endTime, true);
-          }else{
-              this.datePickerRange.stopMove = false
-              this.startTime = null;
-              this.endTime = null;
-              this.proxyEmit(null, null, true);
+          if (this.datePickerRange.stopMove === false) {
+            this.datePickerRange.stopMove = true;
+            this.proxyEmit(startTime, endTime, true);
+          } else {
+            this.datePickerRange.stopMove = false;
+            this.startTime = null;
+            this.endTime = null;
+            this.proxyEmit(null, null, true);
           }
 
           return;
         }
-
 
         this.proxyEmit(startTime, endTime, true);
 
         this.startTime = startTime;
         this.endTime = endTime;
       } else {
-          this.startTime = item.date
-          this.$emit('change',item.date)
+        this.startTime = item.date;
+        this.$emit("change", item.date);
       }
     },
     initData(y, m) {
@@ -231,10 +228,7 @@ export default {
     },
     reversal(cell) {
       if (this.startTime && this.endTime) {
-        if (
-          this.endTime < this.startTime &&
-          this.endTime != cell.date
-        ) {
+        if (this.endTime < this.startTime && this.endTime != cell.date) {
           let tmp = this.startTime;
           this.startTime = this.endTime;
           this.endTime = tmp;
@@ -242,8 +236,8 @@ export default {
       }
     },
     handleMouseMove() {
-      if(this.type !=='rangeDate'){
-        return
+      if (this.type !== "rangeDate") {
+        return;
       }
       let target = event.target;
       if (target.tagName === "EM") {
@@ -255,21 +249,14 @@ export default {
       if (row !== undefined || column !== undefined) {
         let cell = this.getDateOfCell(row, column);
 
-        const stopMove = this.datePickerRange.stopMove
+        const stopMove = this.datePickerRange.stopMove;
 
         if (this.startTime && cell && !stopMove) {
-            if (this.startTime !== cell.date) {
-             this.endTime = cell.date;
-            } 
-          // if (this.startTime.date < cell.date) {
-          //   this.endTime = cell;
-          // } else if (this.startTime.date > cell.date) {
-          //   this.endTime = cell;
-          // }
+          if (this.startTime !== cell.date) {
+            this.endTime = cell.date;
+          }
           this.reversal(cell);
         }
-
-
       }
     }
   }
