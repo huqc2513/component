@@ -7,19 +7,18 @@
         :value="label"
         v-model="model"
         @change="change"
-        :class="{'activeClass':groupStyle}"
-      >
-
+        :class="{ activeClass: groupStyle }"
+      />
       <input
         v-else
         type="checkbox"
         :value="currentValue"
-        @change="change"
-        :class="{'activeClass':currentValue}"
-      >
-
+        ref="input"
+         @change="change"
+        :class="{ activeClass: currentValue }"
+      />
     </span>
-    {{label}}
+    {{ label }}
     <slot></slot>
   </label>
 </template>
@@ -49,7 +48,7 @@ export default {
   },
   watch: {
     value(val) {
-      this.updateModel();
+        this.updateModel();
     }
   },
   data() {
@@ -74,6 +73,7 @@ export default {
     },
     change(event) {
       const checked = event.target.checked;
+
       this.currentValue = checked;
 
       if (this.group) {
@@ -108,8 +108,6 @@ label {
   background-color: #2d8cf0 !important;
   transition: border-color 0.2s ease-in-out;
   background-color: 0.2s ease-in-out;
-  // box-shadow: 0px 0px 4px;
-  // box-shadow .2s ease-in-out;
 }
 
 input[type=checkbox] {

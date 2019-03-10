@@ -72,7 +72,14 @@ export default new Router ({
       path: '/pullRefresh',
       component: resolve => require (['../pages/pull-refresh.vue'], resolve),
       meta: {
-        title: '上啦',
+        title: '上拉',
+      },
+    },
+    {
+      path: '/tree',
+      component: resolve => require (['../pages/tree.vue'], resolve),
+      meta: {
+        title: '树形菜单',
       },
     },
     {

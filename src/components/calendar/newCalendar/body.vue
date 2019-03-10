@@ -55,8 +55,6 @@ export default {
   },
   mounted() {
     this.datePickerRange = findComponentUpward(this, "i-datePickerRange");
-    // console.error('min',dateToString(this.minDate))
-    // console.error('starttime',dateToString(this.startTime))
   },
   watch: {
     year(val) {
